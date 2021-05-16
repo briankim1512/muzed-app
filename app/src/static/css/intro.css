@@ -1,0 +1,25 @@
+.intro-logo {
+    width: 175px;
+}
+
+.intro-title {
+    font-weight: bold;
+    font-stretch: extra-condensed;
+    letter-spacing: 20px;
+    padding-left: 20px;
+    transform: scaleY(1.5)
+}
+
+.intro-subtitle {
+    font-family: serif;
+    transform: scaleY(1.5)
+}
+
+.intro-btn {
+    background: none;
+    border: 0.2ch solid;
+    border-radius: 0.5ch;
+    padding: 0px 13px;
+    font-size: 1.5em;
+    color: #CCC3AB;
+}

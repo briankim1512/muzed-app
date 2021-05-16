@@ -1,7 +1,35 @@
 <html>
     <head>
         {% load static %}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}"></head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    </head>
     <body>
+        <!-- Intro Frame -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/intro.css' %}">
+        <div id="intro-frame" class="frame flex-vertical flex-center flex-spaced">
+            <div class="flex flex-vertical flex-center">
+                <img class="intro-logo" src="{% static 'img/logo.svg' %}">
+                <h1 class="intro-title">MUZED</h1>
+            </div>
+            <div class="flex flex-vertical flex-center">
+                <button class="intro-btn">Start</button>
+                <p class="intro-subtitle">Dear Acoustic Memories</p>
+            </div>
+        </div>
+    
+        <!-- Landing Frame -->
+
+        <!-- Logging Frame -->
+
+        <!-- Playing Frame -->
+
+        <!-- Sharing Frame -->
+
+        <!-- Load React. -->
+        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+        <!-- Load Scripts -->
+        <script src="{% static 'js/index.js' %}"></script>
     </body>
 </html>
