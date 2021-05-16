@@ -1,0 +1,41 @@
+#landing-header {
+    width: 85%;
+    padding-top: 10%;
+}
+
+#landing-diary {
+    width: 80%;
+    height: 50vh;
+    overflow: scroll
+}
+
+#landing-diary::-webkit-scrollbar {
+    display:none;
+}
+
+.landing-title {
+    font-size: 1.4em;
+    font-family: serif;
+    margin: 0px;
+}    
+
+.landing-header-icon {
+    width: 10%;
+}    
+
+.landing-add {
+    width: 12%;
+}    
+
+.diary-entry {
+    box-sizing: border-box;
+    width: 100%;
+    height: 10vh;
+    padding: 0px 20px;
+    background-color: #222;
+    user-select: none;
+}
+
+.diary-entry-song-space {
+    padding: 0px 5px;
+}

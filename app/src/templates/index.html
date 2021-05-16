@@ -7,7 +7,7 @@
     <body>
         <!-- Intro Frame -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/intro.css' %}">
-        <div id="intro-frame" class="frame flex-vertical flex-center flex-spaced">
+        <div id="intro-frame" class="frame flex-vertical flex-center flex-spaced hidden">
             <div class="flex flex-vertical flex-center">
                 <img class="intro-logo" src="{% static 'img/logo.svg' %}">
                 <h1 class="intro-title">MUZED</h1>
@@ -19,7 +19,26 @@
         </div>
     
         <!-- Landing Frame -->
-
+        <link rel="stylesheet" type="text/css" href="{% static 'css/landing.css' %}">
+        <div id="landing-frame" class="frame flex-vertical flex-center flex-spread">
+            <div id="landing-header" class="flex flex-horizontal flex-center flex-spread">
+                <img class="landing-header-icon no-select" src="{% static 'img/filter.svg' %}">
+                <h1 class="landing-title">HEADER</h1>
+                <img class="landing-header-icon no-select" src="{% static 'img/notice.svg' %}">
+            </div>
+            <div id="landing-diary" class="flex flex-vertical">
+                <div v-for="entry in entries" class="diary-entry flex flex-horizontal flex-spread">
+                    <p class="diary-entry-date">[[entry.date]]</p>
+                    <div class="flex flex-horizontal flex-spaced">
+                        <p class="diary-entry-song">[[entry.songName]]</p>
+                        <p class="diary-entry-song-space">-</p>
+                        <p class="diary-entry-song">[[entry.songArtist]]</p>
+                    </div>
+                </div>
+            </div>
+            <img class="landing-add no-select" src="{% static 'img/add.svg' %}">
+            <div class="flex flex-horizontal flex-center"></div>
+        </div>
         <!-- Logging Frame -->
 
         <!-- Playing Frame -->
@@ -27,8 +46,7 @@
         <!-- Sharing Frame -->
 
         <!-- Load React. -->
-        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
-        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
         <!-- Load Scripts -->
         <script src="{% static 'js/index.js' %}"></script>
     </body>

@@ -34,3 +34,15 @@ body {
 .flex-spaced {
     justify-content: space-around;
 }
+
+.flex-spread {
+    justify-content: space-between;
+}
+
+.hidden {
+    display: none;
+}
+
+.no-select {
+    user-select: none;
+}
