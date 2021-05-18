@@ -20,7 +20,7 @@
     
         <!-- Landing Frame -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/landing.css' %}">
-        <div id="landing-frame" class="frame flex-vertical flex-center flex-spread">
+        <div id="landing-frame" class="frame flex-vertical flex-center flex-spread hidden">
             <div id="landing-header" class="flex flex-horizontal flex-center flex-spread">
                 <img class="landing-header-icon no-select" src="{% static 'img/filter.svg' %}">
                 <h1 class="landing-title">HEADER</h1>
@@ -39,8 +39,102 @@
             <img class="landing-add no-select" src="{% static 'img/add.svg' %}">
             <div class="flex flex-horizontal flex-center"></div>
         </div>
-        <!-- Logging Frame -->
 
+        <!-- Logging Frame -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/logging.css' %}">
+        <div id="logging-frame" class="frame flex-vertical flex-center">
+            <!-- First Logging Frame -->
+            <div id="logging-subframe-1" class="subframe flex-vertical flex-center flex-spaced hidden">
+                <h1 class="logging-title no-margin-bottom">Mandatory Field</h1>
+                <p class="logging-page no-margin-top">(1/2)</p>
+                <div class="logging-music"></div>
+                <p class="logging-music-title no-margin-top no-margin-bottom">Music Title</p>
+                <p class="logging-artist-name no-margin-top">Artist Name</p>
+                <textarea id="logging-story" class="logging-textarea logging-textinput" placeholder="What is the story behind this song?"></textarea>
+                <div class="logging-bottom flex flex-horizontal flex-spread">
+                    <button class="log-first-option">Add Tag</button>
+                    <button class="log-first-option">Finish</button>
+                </div>
+            </div>
+            <!-- Second Logging Frame -->
+            <div id="logging-subframe-2" class="subframe flex-vertical flex-center flex-spaced hidden">
+                <h1 class="logging-title no-margin-bottom">Tag Options</h1>
+                <p class="logging-page no-margin-top">(2/2)</p>
+                <input type="date" class="logging-textinput logging-dateinput">
+                <div class="tag-options flex flex-vertical">
+                    <div class="tag-option flex flex flex-horizontal flex-spread">
+                        <p class="tag-text">Add Related People</p>
+                        <img src="{% static 'img/option_arrow.svg' %}">
+                    </div>
+                    <div class="tag-option flex flex flex-horizontal flex-spread">
+                        <p class="tag-text">Add Mood</p>
+                        <img src="{% static 'img/option_arrow.svg' %}">
+                    </div>
+                    <div class="tag-option tag-option-bottom flex flex flex-horizontal flex-spread">
+                        <p class="tag-text">Add Location</p>
+                        <img src="{% static 'img/option_arrow.svg' %}">
+                    </div>
+                </div>
+                <div class="tag-image flex flex-vertical">
+                    <p class="tag-text">Photos</p>
+                    <div id="add-image" class="flex flex-center">
+                        <img src="{% static 'img/plus.svg' %}">
+                    </div>
+                </div>
+                <div class="tag-audio flex flex-vertical">
+                    <p class="tag-text">Audio Recording</p>
+                    <div id="audio-record" class="flex flex-horizontal flex-spread">
+                        <img src="{% static 'img/record.svg' %}">
+                        <p class="tag-subtext">Press here to start recording...</p>
+                    </div>
+                </div>
+                <div class="flex flex-vertical bottom-buffer">
+                    <div class="flex flex-horizontal flex-spread">
+                        <button class="log-second-option">Previous</button>
+                        <button class="log-second-option">Preview</button>
+                    </div>
+                    <button class="log-submit-option">Finsh</button>
+                </div>
+            </div>
+            <!-- People Tagging Frame -->
+            <div id="tagging-people" class="subframe flex-vertical flex-center flex-spread hidden">
+                <h1 class="logging-title no-margin-bottom">Add People Tag</h1>
+                <input type="text" id="person-input" class="logging-textinput" placeholder="Add Person's Name">
+                <div id="people-list">
+                </div>
+                <textarea id="people-detail" class="logging-textarea logging-textinput bottom-buffer" placeholder="Give a brief descript about this person or people?"></textarea>
+            </div>
+            <!-- Mood Tagging Frame -->
+            <div id="tagging-people" class="subframe flex-vertical flex-center flex-start hidden">
+                <h1 class="logging-title no-margin-bottom">Add Mood Tag</h1>
+                <div class="mood-list flex flex-horizontal flex-center flex-spread flex-wrap">
+                    <div class="mood-item flex flex-vertical flex-center">
+                        <img src="{% static 'img/emoji/happy.svg' %}" class="mood-image">
+                        <p class="mood-text">HAPPY</p>
+                    </div>
+                    <div class="mood-item flex flex-vertical flex-center">
+                        <img src="{% static 'img/emoji/sad.svg' %}" class="mood-image">
+                        <p class="mood-text">SAD</p>
+                    </div>
+                    <div class="mood-item flex flex-vertical flex-center">
+                        <img src="{% static 'img/emoji/mad.svg' %}" class="mood-image">
+                        <p class="mood-text">MAD</p>
+                    </div>
+                    <div class="mood-item flex flex-vertical flex-center">
+                        <img src="{% static 'img/emoji/hopeful.svg' %}" class="mood-image">
+                        <p class="mood-text">HOPEFUL</p>
+                    </div>
+                    <div class="mood-item flex flex-vertical flex-center">
+                        <img src="{% static 'img/emoji/blue.svg' %}" class="mood-image">
+                        <p class="mood-text">BLUE</p>
+                    </div>
+                    <div class="mood-item flex flex-vertical flex-center">
+                        <img src="{% static 'img/emoji/excited.svg' %}" class="mood-image">
+                        <p class="mood-text">EXCITED</p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Playing Frame -->
 
         <!-- Sharing Frame -->

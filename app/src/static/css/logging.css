@@ -1,0 +1,127 @@
+#add-image {
+    border: 1px solid white;
+    border-radius: 5px;
+    height: 80px;
+    width: 80px;
+}
+
+#audio-record {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 0px 15px;
+}
+
+#people-list {
+    width: 80%;
+    height: 30%;
+    overflow-y: scroll;
+}
+
+#people-list::-webkit-scrollbar {
+    display:none;
+}
+
+.logging-title {
+    font-family: serif;
+}
+
+.logging-music {
+    height: 20%;
+}
+
+.logging-music-title {
+    font-weight: bold;
+}
+
+.logging-textarea {
+    height: 40%;
+}
+
+.logging-textinput {
+    width: 80%;
+    color: white;
+    background-color: black;
+    border-color: #CCC3AB;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.logging-dateinput::-webkit-calendar-picker-indicator { 
+    filter: invert(1);
+}
+
+.logging-bottom {
+    width: 60%;
+    margin-bottom: 10px;
+}
+
+.log-first-option {
+    background-color: #CCC3AB;
+    border: 1px solid #CCC3AB;
+    border-radius: 3px;
+    color: white;
+    padding: 5px 15px;
+}
+
+.log-second-option {
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 3px;
+    color: white;
+    padding: 5px 15px;
+}
+
+.log-submit-option {
+    background-color: #CCC3AB;
+    border: 1px solid #CCC3AB;
+    border-radius: 3px;
+    color: white;
+    padding: 5px 15px;
+}
+
+.tag-options {
+    width: 100%;
+}
+
+.tag-option {
+    padding: 0px 25px;
+    border-top: 1px solid white;
+    user-select: none;
+}
+
+.tag-option-bottom {
+    border-bottom: 1px solid white;
+}
+
+.tag-image {
+    align-self: flex-start;
+    padding-left: 25px;
+}
+
+.tag-audio {
+    align-self: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0px 25px;
+}
+
+.tag-subtext {
+    font-size: 10px;
+}
+
+.mood-list {
+    width: 80%;
+    margin-top: 50px;
+}
+
+.mood-item {
+    width: 30%;
+    margin-bottom: 10px;
+    border: 1px solid #CCC3AB;
+    border-radius: 3px;
+    user-select: none;
+}
+
+.mood-text {
+    font-size: 0.8em;
+}

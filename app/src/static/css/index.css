@@ -14,8 +14,20 @@ body {
     background-color: black;
 }
 
+.subframe {
+    display: flex;
+    width: 80%;
+    height: 90%;
+    border: 1px solid #CCC3AB;
+    border-radius: 20px;
+}
+
 .flex {
     display: flex;
+}
+
+.flex-wrap{
+    flex-wrap: wrap;
 }
 
 .flex-vertical {
@@ -39,10 +51,26 @@ body {
     justify-content: space-between;
 }
 
+.flex-start {
+    justify-content: flex-start;
+}
+
 .hidden {
     display: none;
 }
 
 .no-select {
     user-select: none;
+}
+
+.no-margin-top {
+    margin-top: 0px
+}
+
+.no-margin-bottom {
+    margin-bottom: 0px
+}
+
+.bottom-buffer {
+    margin-bottom: 15px;
 }
