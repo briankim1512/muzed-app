@@ -42,7 +42,7 @@
 
         <!-- Logging Frame -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/logging.css' %}">
-        <div id="logging-frame" class="frame flex-vertical flex-center">
+        <div id="logging-frame" class="frame flex-vertical flex-center hidden">
             <!-- First Logging Frame -->
             <div id="logging-subframe-1" class="subframe flex-vertical flex-center flex-spaced hidden">
                 <h1 class="logging-title no-margin-bottom">Mandatory Field</h1>
@@ -136,8 +136,51 @@
             </div>
         </div>
         <!-- Playing Frame -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/playing.css' %}">
+        <div id="playing-frame" class="frame flex-vertical flex-center flex-spread">
+            <div id="playing-image">
+            </div>
+            <div id="playing-album" class="flex flex-center">
+                <div id="playing-album-center"></div>
+            </div>
+            <div id="playing-controls" class="flex flex-horizontal flex-center flex-spaced">
+                <img src="{% static 'img/music/shuffle.svg' %}">
+                <img src="{% static 'img/music/previous.svg' %}">
+                <img src="{% static 'img/music/play.svg' %}">
+                <img src="{% static 'img/music/forward.svg' %}">
+                <img src="{% static 'img/music/repeat.svg' %}">
+            </div>
+            <div id="playing-subframe" class="flex flex-vertical flex-center">
+                <div id="playing-subframe-indicator"></div>
+                <div id="playing-subheader" class="flex flex-horizontal flex-spaced">
+                    <p>LYRICS</p>
+                    <p>MY NOTE</p>
+                    <p>MEMORIES</p>
+                </div>
+            </div>
+        </div>
 
         <!-- Sharing Frame -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/sharing.css' %}">
+        <div id="sharing-frame" class="frame flex-vertical flex-center flex-spread hidden">
+            <div id="landing-header" class="flex flex-horizontal flex-center flex-spread">
+                <img class="landing-header-icon no-select" src="{% static 'img/filter.svg' %}">
+                <h1 class="landing-title">HEADER</h1>
+                <img class="landing-header-icon no-select" src="{% static 'img/notice.svg' %}">
+            </div>
+            <div id="landing-diary" class="flex flex-vertical">
+                <div v-for="entry in entries" class="diary-entry flex flex-horizontal flex-spread">
+                    <p class="diary-entry-date">[[entry.date]]</p>
+                    <div class="flex flex-horizontal flex-spaced">
+                        <p class="diary-entry-song">[[entry.songName]]</p>
+                        <p class="diary-entry-song-space">-</p>
+                        <p class="diary-entry-song">[[entry.songArtist]]</p>
+                    </div>
+                </div>
+            </div>
+            <img class="landing-add no-select" src="{% static 'img/add.svg' %}">
+            <div class="flex flex-horizontal flex-center"></div>
+        </div>
 
         <!-- Load React. -->
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>

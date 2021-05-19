@@ -8,6 +8,7 @@ body {
 }
 
 .frame {
+    position: fixed;
     display: flex;
     width: 56vh;
     height: 100vh;
