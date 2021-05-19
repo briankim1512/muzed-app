@@ -159,6 +159,30 @@
                         <p>MEMORIES</p>
                     </div>
                 </div>
+                <div id="note-subframe" class="playing-subsubframe flex flex-vertical flex-spaced hidden">
+                    <img src="{% static 'img/music/note_start.svg' %}">
+                    <p></p>
+                    <img src="{% static 'img/music/note_end.svg' %}" class="note-end">
+                </div>
+                <div id="memory-subframe" class="playing-subsubframe flex flex-vertical">
+                    <div id="people-memory-card" class="memory-card">
+                        <p class="memory-card-subtitle">PEOPLE RELATED TO THIS SONG</p>
+                        <div v-for="name in list" id="people-memory-list">
+                            <p>[[ name ]]</p>
+                        </div>
+                        <p id="people-memory-description"></p>
+                    </div>
+                    <div id="mood-memory-card" class="memory-card">
+                        <p class="memory-card-subtitle">MOODS RELATED TO THIS SONG</p>
+                        <img src="">
+                    </div>
+                    <div id="audio-memory-card" class="memory-card">
+                        <p class="memory-card-subtitle">SOUNDS RELATED TO THIS SONG</p>
+                        <audio controls>
+                            <source src="">
+                        </audio>
+                    </div>
+                </div>
             </div>
         </div>
 
