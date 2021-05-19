@@ -75,11 +75,11 @@
                 <p class="logging-page no-margin-top">(2/2)</p>
                 <input type="date" class="logging-textinput logging-dateinput">
                 <div class="tag-options flex flex-vertical">
-                    <div class="tag-option flex flex flex-horizontal flex-spread">
+                    <div id="go-tagging-people" class="tag-option flex flex flex-horizontal flex-spread">
                         <p class="tag-text">Add Related People</p>
                         <img src="{% static 'img/option_arrow.svg' %}">
                     </div>
-                    <div class="tag-option flex flex flex-horizontal flex-spread">
+                    <div id="go-tagging-mood" class="tag-option flex flex flex-horizontal flex-spread">
                         <p class="tag-text">Add Mood</p>
                         <img src="{% static 'img/option_arrow.svg' %}">
                     </div>
@@ -117,7 +117,7 @@
                 <textarea id="people-detail" class="logging-textarea logging-textinput bottom-buffer" placeholder="Give a brief descript about this person or people?"></textarea>
             </div>
             <!-- Mood Tagging Frame -->
-            <div id="tagging-people" class="subframe flex-vertical flex-center flex-start">
+            <div id="tagging-mood" class="subframe flex-vertical flex-center flex-start">
                 <h1 class="logging-title no-margin-bottom">Add Mood Tag</h1>
                 <div class="mood-list flex flex-horizontal flex-center flex-spread flex-wrap">
                     <div class="mood-item flex flex-vertical flex-center">

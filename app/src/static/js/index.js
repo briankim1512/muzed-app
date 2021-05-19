@@ -109,28 +109,38 @@ document.addEventListener('DOMContentLoaded', function () {
     
     let loggingSubframe1 = document.querySelector('#logging-subframe-1')
     let loggingSubframe2 = document.querySelector('#logging-subframe-2')
+    let taggingPeople = document.querySelector('#tagging-people')
+    let taggingMood = document.querySelector('#tagging-mood')
     
     let loggingSearchAdd = document.querySelector('#logging-search-add')
     let searchInput = document.querySelector('#logging-search-input')
     let searchPreview = new Audio()
     let searchResult = document.querySelector('#search-result')
     let addSearchLog = document.querySelector('#add-search-log')
+
+    let goTaggingPeople = document.querySelector('#go-tagging-people')
+    let goTaggingMood = document.querySelector('#go-tagging-mood')
     
     let addTagLog = document.querySelector('#add-tag-log')
     let preFinishLog = document.querySelector('#pre-finish-log')
     
     let personInput = document.querySelector('#person-input')
     let finishLog = document.querySelector('#finish-log')
+    let peopleDetail = document.querySelector('#people-detail')
 
     let currentFrame = null
     let previousFrame = null
     
     let loggingInfo = {}
+    let moodLog = null
 
     function clearLogFrames () {
         currentFrame = loggingSearch
         previousFrame = null
+        moodLog = null
+        peopleList.list = []
         loggingFrame.style.opacity = 0
+
         setTimeout(function () {
             previousLog.style.display = 'none'
             searchResult.style.display = 'none'
@@ -174,20 +184,14 @@ document.addEventListener('DOMContentLoaded', function () {
     searchInput.addEventListener('keyup', function(event) {
         if (event.keyCode==13) {
             searchNapster(searchInput.value).then(data => {
-                
-
                 searchResult.style.display = 'flex'
                 loggingSearchAdd.style.display = 'flex'
 
-                let searchTitle = document.querySelector('#search-title')
-                let searchArtist = document.querySelector('#search-artist')
-                let searchAlbum = document.querySelector('#search-album')
-
                 loggingInfo = data
 
-                searchTitle.innerHTML = data.title
-                searchArtist.innerHTML = data.artist
-                searchAlbum.src = data.album
+                document.querySelector('#search-title').innerHTML = data.title
+                document.querySelector('#search-artist').innerHTML = data.artist
+                document.querySelector('#search-album').src = data.album
                 searchPreview.src = data.preview
                 searchPreview.play()
             })
@@ -195,15 +199,10 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     // Search To Log
-
     addSearchLog.addEventListener('click', function() {
-        let loggingMusicTitle = document.querySelector('.logging-music-title')
-        let loggingMusicArtist = document.querySelector('.logging-music-artist')
-        let loggingMusicAlbum = document.querySelector('.logging-music-album')
-
-        loggingMusicTitle.innerHTML=loggingInfo.title
-        loggingMusicArtist.innerHTML=loggingInfo.artist
-        loggingMusicAlbum.src=loggingInfo.album
+        document.querySelector('.logging-music-title').innerHTML=loggingInfo.title
+        document.querySelector('.logging-music-artist').innerHTML=loggingInfo.artist
+        document.querySelector('.logging-music-album').src=loggingInfo.album
         
         searchPreview.pause()
         previousLog.style.display = 'flex'
@@ -212,45 +211,68 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     // Add Additional Logs
-
     addTagLog.addEventListener('click', function() {
         document.querySelector('.logging-dateinput').value = new Date().toJSON().slice(0,10)
         loggingInfo['note'] = document.querySelector('#logging-story').value
+        loggingInfo['memories'] = {}
 
         goToFrame(loggingSubframe1, loggingSubframe2)
     })
 
     // Pre Finish Logs
-
     preFinishLog.addEventListener('click', function() {
-        loggingStory = document.querySelector('#logging-story')
+        let loggingStory = document.querySelector('#logging-story')
         loggingInfo['date'] = new Date().toJSON().slice(0,10)
         loggingInfo['note'] = loggingStory.value
         loggingInfo['memories'] = null
         loggingStory.value = ""
+
         diary.entries.push(loggingInfo)
         loggingInfo = {}
 
         clearLogFrames()
     })
 
-    // Person List Append
+    // Go to Tagging People
+    goTaggingPeople.addEventListener('click', function() {
+        goToFrame(loggingSubframe2, taggingPeople)
+    })
 
+    // Go to Tagging Mood
+    goTaggingMood.addEventListener('click', function() {
+        goToFrame(loggingSubframe2, taggingMood)
+    })
+
+
+    // Person List Append
     personInput.addEventListener('keyup', function(event) {
         if (event.keyCode==13) {
             peopleList.list.push(personInput.value)
         }
     })
 
+    // Mood Select
+    let moodList = document.querySelectorAll('.mood-item')
+    moodList.forEach(element => {
+        element.addEventListener('click', function() {
+            goBackFrame()
+            moodLog = element.childNodes[3].innerHTML
+        })
+    })
+
     // Finish Logs
-    
     finishLog.addEventListener('click', function() {
-        let peopleLog = {
-            list: [],
-            description: ''
+        loggingInfo['date'] = document.querySelector('.logging-dateinput').value
+        loggingInfo['memories']['people'] = {
+            list: peopleList.list,
+            description: peopleDetail.value
         }
-        let mood = ''
-        let imageUrl = ''
+        loggingInfo['memories']['mood'] = moodLog
+
+        diary.entries.push(loggingInfo)
+        loggingInfo = {}
+
+        console.log(diary.entries)
 
         clearLogFrames()
     })
