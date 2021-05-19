@@ -23,16 +23,14 @@
         <div id="landing-frame" class="frame flex-vertical flex-center flex-spread">
             <div id="landing-header" class="flex flex-horizontal flex-center flex-spread">
                 <img class="landing-header-icon no-select" src="{% static 'img/filter.svg' %}">
-                <h1 class="landing-title">HEADER</h1>
+                <h1 class="landing-title">DIARY</h1>
                 <img class="landing-header-icon no-select" src="{% static 'img/notice.svg' %}">
             </div>
             <div id="landing-diary" class="flex flex-vertical">
                 <div v-for="entry in entries" class="diary-entry flex flex-horizontal flex-spread">
                     <p class="diary-entry-date">[[entry.date]]</p>
                     <div class="flex flex-horizontal flex-spaced">
-                        <p class="diary-entry-song">[[entry.songName]]</p>
-                        <p class="diary-entry-song-space">-</p>
-                        <p class="diary-entry-song">[[entry.songArtist]]</p>
+                        <p class="diary-entry-song">[[entry.title]]</p>
                     </div>
                 </div>
             </div>
@@ -42,18 +40,30 @@
 
         <!-- Logging Frame -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/logging.css' %}">
-        <div id="logging-frame" class="frame flex-vertical flex-center">
+        <div id="logging-frame" class="frame flex flex-vertical flex-center">
+            <!-- Searching Frame -->
+            <div id="logging-search" class="subframe flex-vertical flex-center flex-spaced">
+                <input type="text" id="logging-search-input" class="logging-textinput" placeholder="Search for your song">
+                <div id="search-result" class="flex-vertical flex-center">
+                    <h1 id="search-title"></h1>
+                    <p id="search-artist"></p>
+                    <img src="" id="search-album" class="album-cover">
+                </div>
+                <div id="logging-search-add" class="logging-bottom flex-horizontal flex-spaced">
+                    <button id="add-search-log" class="log-first-option">Add</button>
+                </div>
+            </div>
             <!-- First Logging Frame -->
             <div id="logging-subframe-1" class="subframe flex-vertical flex-center flex-spaced">
                 <h1 class="logging-title no-margin-bottom">Mandatory Field</h1>
                 <p class="logging-page no-margin-top">(1/2)</p>
-                <div class="logging-music"></div>
+                <img class="album-cover logging-music-album">
                 <p class="logging-music-title no-margin-top no-margin-bottom">Music Title</p>
-                <p class="logging-artist-name no-margin-top">Artist Name</p>
+                <p class="logging-music-artist no-margin-top">Artist Name</p>
                 <textarea id="logging-story" class="logging-textarea logging-textinput" placeholder="What is the story behind this song?"></textarea>
                 <div class="logging-bottom flex flex-horizontal flex-spread">
-                    <button class="log-first-option">Add Tag</button>
-                    <button class="log-first-option">Finish</button>
+                    <button id="add-tag-log" class="log-first-option">Add Tag</button>
+                    <button id="pre-finish-log" class="log-first-option">Finish</button>
                 </div>
             </div>
             <!-- Second Logging Frame -->
@@ -89,11 +99,7 @@
                     </div>
                 </div>
                 <div class="flex flex-vertical bottom-buffer">
-                    <div class="flex flex-horizontal flex-spread">
-                        <button class="log-second-option">Previous</button>
-                        <button class="log-second-option">Preview</button>
-                    </div>
-                    <button class="log-submit-option">Finsh</button>
+                    <button id="finish-log" class="log-submit-option">Finish</button>
                 </div>
             </div>
             <!-- People Tagging Frame -->
@@ -101,6 +107,9 @@
                 <h1 class="logging-title no-margin-bottom">Add People Tag</h1>
                 <input type="text" id="person-input" class="logging-textinput" placeholder="Add Person's Name">
                 <div id="people-list">
+                    <ul v-for="person in list">
+                        <li>[[person]]</li>
+                    </ul>
                 </div>
                 <textarea id="people-detail" class="logging-textarea logging-textinput bottom-buffer" placeholder="Give a brief descript about this person or people?"></textarea>
             </div>

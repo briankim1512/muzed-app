@@ -1,7 +1,25 @@
 #logging-frame {
     background-color: rgba(0,0,0,0.5);
+    display: none;
     opacity: 0%;
     transition: 0.4s;
+}
+
+#logging-search {
+    opacity: 100%;
+}
+
+#logging-search-add {
+    display: none;
+}
+
+#search-title {
+    margin: 0;
+    color: #CCC3AB;
+}
+
+#search-result {
+    display: none;
 }
 
 #add-image {
@@ -9,6 +27,10 @@
     border-radius: 5px;
     height: 80px;
     width: 80px;
+}
+
+#add-search-log {
+    width: 50%;
 }
 
 #audio-record {
@@ -27,16 +49,23 @@
     display:none;
 }
 
+.album-cover {
+    width: 60%;
+    box-sizing: border-box;
+    border: 1px solid #CCC3AB;
+    border-radius: 20px;
+}
+
 .logging-title {
     font-family: serif;
 }
 
-.logging-music {
-    height: 20%;
-}
-
 .logging-music-title {
     font-weight: bold;
+}
+
+.logging-music-album {
+    width: 40%;
 }
 
 .logging-textarea {

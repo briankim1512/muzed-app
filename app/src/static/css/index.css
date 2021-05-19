@@ -9,19 +9,23 @@ body {
 
 .frame {
     display: none;
-    position: fixed;
+    position: absolute;
     width: 56vh;
     height: 100vh;
     background-color: black;
+    transition: 0.4s;
 }
 
 .subframe {
     display: none;
+    position: absolute;
+    opacity: 0%;
     background-color: black;
     width: 80%;
     height: 90%;
     border: 1px solid #CCC3AB;
     border-radius: 20px;
+    transition: 0.4s;
 }
 
 .flex {

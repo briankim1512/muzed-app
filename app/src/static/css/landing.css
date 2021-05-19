@@ -17,6 +17,7 @@
     font-size: 1.4em;
     font-family: serif;
     margin: 0px;
+    color: #CCC3AB;
 }    
 
 .landing-header-icon {
@@ -30,10 +31,20 @@
 .diary-entry {
     box-sizing: border-box;
     width: 100%;
-    height: 10vh;
     padding: 0px 20px;
     background-color: #222;
     user-select: none;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.diary-entry-date {
+    width: 45%;
+}
+
+.diary-entry-song {
+    text-align: right;
+    color: #CCC3AB
 }
 
 .diary-entry-song-space {
