@@ -2,9 +2,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // Intro Frame Javascript
     let html = document.querySelector('html')
     let introButton = document.querySelector('.intro-btn')
+    let introFrame = document.querySelector('#intro-frame')
+    let landingFrame = document.querySelector('#landing-frame')
     
     introButton.addEventListener('click', function () {
         html.requestFullscreen()
+        introFrame.style.opacity = 0
+        landingFrame.style.display = 'flex'
+        setTimeout(function () {
+            introFrame.style.display = 'none'
+        }, 400)
     })
 
     // Landing Frame Javascript
@@ -27,6 +34,19 @@ document.addEventListener('DOMContentLoaded', function () {
         data: {
             entries: entries
         }
+    })
+
+    let loggingFrame = document.querySelector('#logging-frame')
+    let loggingSub1 = document.querySelector('#logging-subframe-1')
+    let landingAdd = document.querySelector('.landing-add')
+
+    loggingSub1.style.display = 'flex'
+
+    landingAdd.addEventListener('click', function() {
+        loggingFrame.style.display = 'flex'
+        setTimeout(function() {
+            loggingFrame.style.opacity = '100%'
+        }, 100)
     })
 
     // Logging Frame Javascript

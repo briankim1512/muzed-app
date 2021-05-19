@@ -1,3 +1,9 @@
+#logging-frame {
+    background-color: rgba(0,0,0,0.5);
+    opacity: 0%;
+    transition: 0.4s;
+}
+
 #add-image {
     border: 1px solid white;
     border-radius: 5px;
