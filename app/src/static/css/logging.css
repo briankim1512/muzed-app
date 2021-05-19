@@ -5,6 +5,23 @@
     transition: 0.4s;
 }
 
+#exit-log {
+    position: absolute;
+    width: 3vh;
+    top: 8vh;
+    right: 8vh;
+    z-index: 3;
+}
+
+#previous-log {
+    display: none;
+    position: absolute;
+    width: 3vh;
+    top: 8vh;
+    left: 8vh;
+    z-index: 3;
+}
+
 #logging-search {
     opacity: 100%;
 }
@@ -58,6 +75,7 @@
 
 .logging-title {
     font-family: serif;
+    font-size: 1.5em;
 }
 
 .logging-music-title {

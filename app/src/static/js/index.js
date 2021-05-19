@@ -104,11 +104,72 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Logging Frame Javascript
 
+    let exitLog = document.querySelector('#exit-log')
+    let previousLog = document.querySelector('#previous-log')
+    
+    let loggingSubframe1 = document.querySelector('#logging-subframe-1')
+    let loggingSubframe2 = document.querySelector('#logging-subframe-2')
+    
+    let loggingSearchAdd = document.querySelector('#logging-search-add')
     let searchInput = document.querySelector('#logging-search-input')
     let searchPreview = new Audio()
     let searchResult = document.querySelector('#search-result')
-    let loggingSearchAdd = document.querySelector('#logging-search-add')
+    let addSearchLog = document.querySelector('#add-search-log')
+    
+    let addTagLog = document.querySelector('#add-tag-log')
+    let preFinishLog = document.querySelector('#pre-finish-log')
+    
+    let personInput = document.querySelector('#person-input')
+    let finishLog = document.querySelector('#finish-log')
+
+    let currentFrame = null
+    let previousFrame = null
+    
     let loggingInfo = {}
+
+    function clearLogFrames () {
+        currentFrame = loggingSearch
+        previousFrame = null
+        loggingFrame.style.opacity = 0
+        setTimeout(function () {
+            previousLog.style.display = 'none'
+            searchResult.style.display = 'none'
+            loggingSearchAdd.style.display = 'none'
+            loggingFrame.style.display = 'none'
+            loggingSearch.style.display = 'flex'
+            loggingSearch.style.opacity = 100
+            loggingSubframe1.style.display = 'none'
+            loggingSubframe1.style.opacity = 0
+            loggingSubframe2.style.display = 'none'
+            loggingSubframe2.style.opacity = 0
+        }, 401)
+    }
+
+    function goToFrame (thisFrame, targetFrame) {
+        currentFrame = targetFrame
+        previousFrame = thisFrame
+
+        thisFrame.style.opacity = 0
+        setTimeout(function () {
+            thisFrame.style.display = 'none'
+        }, 401)
+        targetFrame.style.display = 'flex'
+        setTimeout(function () {
+            targetFrame.style.opacity = 100
+        }, 100)
+    }
+
+    function goBackFrame () {
+        goToFrame(currentFrame, previousFrame)
+    }
+
+    exitLog.addEventListener('click', function () {
+        clearLogFrames()
+    })
+
+    previousLog.addEventListener('click', function () {
+        goBackFrame()
+    })
 
     searchInput.addEventListener('keyup', function(event) {
         if (event.keyCode==13) {
@@ -135,9 +196,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Search To Log
 
-    let addSearchLog = document.querySelector('#add-search-log')
-    let loggingSubframe1 = document.querySelector('#logging-subframe-1')
-
     addSearchLog.addEventListener('click', function() {
         let loggingMusicTitle = document.querySelector('.logging-music-title')
         let loggingMusicArtist = document.querySelector('.logging-music-artist')
@@ -146,40 +204,23 @@ document.addEventListener('DOMContentLoaded', function () {
         loggingMusicTitle.innerHTML=loggingInfo.title
         loggingMusicArtist.innerHTML=loggingInfo.artist
         loggingMusicAlbum.src=loggingInfo.album
-
+        
         searchPreview.pause()
-        loggingSearch.style.opacity = 0
-        setTimeout(function () {
-            loggingSearch.style.display = 'none'
-        }, 401)
-        loggingSubframe1.style.display = 'flex'
-        setTimeout(function () {
-            loggingSubframe1.style.opacity = 100
-        }, 1)
+        previousLog.style.display = 'flex'
+        
+        goToFrame(loggingSearch, loggingSubframe1)
     })
 
     // Add Additional Logs
-
-    let addTagLog = document.querySelector('#add-tag-log')
-    let loggingSubframe2 = document.querySelector('#logging-subframe-2')
 
     addTagLog.addEventListener('click', function() {
         document.querySelector('.logging-dateinput').value = new Date().toJSON().slice(0,10)
         loggingInfo['note'] = document.querySelector('#logging-story').value
 
-        loggingSubframe1.style.opacity = 0
-        setTimeout(function () {
-            loggingSubframe1.style.display = 'none'
-        }, 401)
-        loggingSubframe2.style.display = 'flex'
-        setTimeout(function () {
-            loggingSubframe2.style.opacity = 100
-        }, 100)
+        goToFrame(loggingSubframe1, loggingSubframe2)
     })
 
     // Pre Finish Logs
-
-    let preFinishLog = document.querySelector('#pre-finish-log')
 
     preFinishLog.addEventListener('click', function() {
         loggingStory = document.querySelector('#logging-story')
@@ -190,20 +231,10 @@ document.addEventListener('DOMContentLoaded', function () {
         diary.entries.push(loggingInfo)
         loggingInfo = {}
 
-        searchResult.style.display = 'none'
-        loggingSearchAdd.style.display = 'none'
-        loggingSubframe1.style.display = 'none'
-        loggingSearch.style.display = 'flex'
-        loggingSearch.style.opacity = 100
-        loggingFrame.style.opacity = '0%'
-        setTimeout(function() {
-            loggingFrame.style.display = 'none'
-        }, 100)
+        clearLogFrames()
     })
 
     // Person List Append
-    
-    let personInput = document.querySelector('#person-input')
 
     personInput.addEventListener('keyup', function(event) {
         if (event.keyCode==13) {
@@ -212,8 +243,6 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     // Finish Logs
-
-    let finishLog = document.querySelector('#finish-log')
     
     finishLog.addEventListener('click', function() {
         let peopleLog = {
@@ -223,15 +252,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let mood = ''
         let imageUrl = ''
 
-        searchResult.style.display = 'none'
-        loggingSearchAdd.style.display = 'none'
-        loggingSubframe2.style.display = 'none'
-        loggingSearch.style.display = 'flex'
-        loggingSearch.style.opacity = 100
-        loggingFrame.style.opacity = '0%'
-        setTimeout(function() {
-            loggingFrame.style.display = 'none'
-        }, 100)
+        clearLogFrames()
     })
 
     // Playing Frame Javascript
