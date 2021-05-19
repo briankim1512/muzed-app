@@ -31,6 +31,7 @@
 
 #playing-controls {
     margin-top: 50px;
+    margin-bottom: 30%;
     width: 70%;
 }
 
@@ -39,7 +40,12 @@
 }
 
 #playing-subframe {
+    position: absolute;
+    bottom: 0px;
     width: 100%;
+    background-color: black;
+    overflow: hidden;
+    z-index: 2;
 }
 
 #playing-subframe-indicator {
@@ -51,9 +57,14 @@
 
 #playing-subheader {
     width: 80%;
+    margin-top: 25px;
 }
 
-#playing-subheader p {
+#playing-subheader-options {
+    width: 100%;
+}
+
+#playing-subheader-options p {
     width: 30%;
     text-align: center;
 }

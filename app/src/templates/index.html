@@ -150,12 +150,14 @@
                 <img src="{% static 'img/music/forward.svg' %}">
                 <img src="{% static 'img/music/repeat.svg' %}">
             </div>
-            <div id="playing-subframe" class="flex flex-vertical flex-center">
-                <div id="playing-subframe-indicator"></div>
-                <div id="playing-subheader" class="flex flex-horizontal flex-spaced">
-                    <p>LYRICS</p>
-                    <p>MY NOTE</p>
-                    <p>MEMORIES</p>
+            <div id="playing-subframe" class="flex flex-vertical flex-center flex-spread">
+                <div id="playing-subheader" class="flex flex-vertical flex-center">
+                    <div id="playing-subframe-indicator"></div>
+                    <div id="playing-subheader-options" class="flex flex-horizontal flex-spaced">
+                        <p>LYRICS</p>
+                        <p>MY NOTE</p>
+                        <p>MEMORIES</p>
+                    </div>
                 </div>
             </div>
         </div>
