@@ -7,7 +7,7 @@
     <body>
         <!-- Intro Frame -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/intro.css' %}">
-        <div id="intro-frame" class="frame flex-vertical flex-center flex-spaced hidden">
+        <div id="intro-frame" class="frame flex flex-vertical flex-center flex-spaced">
             <div class="flex flex-vertical flex-center">
                 <img class="intro-logo" src="{% static 'img/logo.svg' %}">
                 <h1 class="intro-title">MUZED</h1>
@@ -20,7 +20,7 @@
     
         <!-- Landing Frame -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/landing.css' %}">
-        <div id="landing-frame" class="frame flex-vertical flex-center flex-spread hidden">
+        <div id="landing-frame" class="frame flex-vertical flex-center flex-spread">
             <div id="landing-header" class="flex flex-horizontal flex-center flex-spread">
                 <img class="landing-header-icon no-select" src="{% static 'img/filter.svg' %}">
                 <h1 class="landing-title">HEADER</h1>
@@ -42,9 +42,9 @@
 
         <!-- Logging Frame -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/logging.css' %}">
-        <div id="logging-frame" class="frame flex-vertical flex-center hidden">
+        <div id="logging-frame" class="frame flex-vertical flex-center">
             <!-- First Logging Frame -->
-            <div id="logging-subframe-1" class="subframe flex-vertical flex-center flex-spaced hidden">
+            <div id="logging-subframe-1" class="subframe flex-vertical flex-center flex-spaced">
                 <h1 class="logging-title no-margin-bottom">Mandatory Field</h1>
                 <p class="logging-page no-margin-top">(1/2)</p>
                 <div class="logging-music"></div>
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <!-- Second Logging Frame -->
-            <div id="logging-subframe-2" class="subframe flex-vertical flex-center flex-spaced hidden">
+            <div id="logging-subframe-2" class="subframe flex-vertical flex-center flex-spaced">
                 <h1 class="logging-title no-margin-bottom">Tag Options</h1>
                 <p class="logging-page no-margin-top">(2/2)</p>
                 <input type="date" class="logging-textinput logging-dateinput">
@@ -97,7 +97,7 @@
                 </div>
             </div>
             <!-- People Tagging Frame -->
-            <div id="tagging-people" class="subframe flex-vertical flex-center flex-spread hidden">
+            <div id="tagging-people" class="subframe flex-vertical flex-center flex-spread">
                 <h1 class="logging-title no-margin-bottom">Add People Tag</h1>
                 <input type="text" id="person-input" class="logging-textinput" placeholder="Add Person's Name">
                 <div id="people-list">
@@ -105,7 +105,7 @@
                 <textarea id="people-detail" class="logging-textarea logging-textinput bottom-buffer" placeholder="Give a brief descript about this person or people?"></textarea>
             </div>
             <!-- Mood Tagging Frame -->
-            <div id="tagging-people" class="subframe flex-vertical flex-center flex-start hidden">
+            <div id="tagging-people" class="subframe flex-vertical flex-center flex-start">
                 <h1 class="logging-title no-margin-bottom">Add Mood Tag</h1>
                 <div class="mood-list flex flex-horizontal flex-center flex-spread flex-wrap">
                     <div class="mood-item flex flex-vertical flex-center">
@@ -159,7 +159,7 @@
                         <p>MEMORIES</p>
                     </div>
                 </div>
-                <div id="note-subframe" class="playing-subsubframe flex flex-vertical flex-spaced hidden">
+                <div id="note-subframe" class="playing-subsubframe flex flex-vertical flex-spaced">
                     <img src="{% static 'img/music/note_start.svg' %}">
                     <p></p>
                     <img src="{% static 'img/music/note_end.svg' %}" class="note-end">
@@ -187,8 +187,8 @@
         </div>
 
         <!-- Sharing Frame -->
-        <link rel="stylesheet" type="text/css" href="{% static 'css/sharing.css' %}">
-        <div id="sharing-frame" class="frame flex-vertical flex-center flex-spread hidden">
+        <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/sharing.css' %}">
+        <div id="sharing-frame" class="frame flex-vertical flex-center flex-spread">
             <div id="landing-header" class="flex flex-horizontal flex-center flex-spread">
                 <img class="landing-header-icon no-select" src="{% static 'img/filter.svg' %}">
                 <h1 class="landing-title">HEADER</h1>
@@ -206,7 +206,7 @@
             </div>
             <img class="landing-add no-select" src="{% static 'img/add.svg' %}">
             <div class="flex flex-horizontal flex-center"></div>
-        </div>
+        </div> -->
 
         <!-- Load React. -->
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>

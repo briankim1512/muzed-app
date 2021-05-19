@@ -8,15 +8,16 @@ body {
 }
 
 .frame {
+    display: none;
     position: fixed;
-    display: flex;
     width: 56vh;
     height: 100vh;
     background-color: black;
 }
 
 .subframe {
-    display: flex;
+    display: none;
+    background-color: black;
     width: 80%;
     height: 90%;
     border: 1px solid #CCC3AB;

@@ -81,6 +81,7 @@
 }
 
 .playing-subsubframe {
+    display: none;
     position: relative;
     width: 65%;
     height: 80%;
