@@ -317,9 +317,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // Finish Logs
     finishLog.addEventListener('click', function() {
         loggingInfo['date'] = document.querySelector('.logging-dateinput').value
-        loggingInfo['memories']['people'] = {
-            list: peopleList.list,
-            description: peopleDetail.value
+        if (peopleList.list.length > 0) {
+            loggingInfo['memories']['people'] = {
+                list: peopleList.list,
+                description: peopleDetail.value
+            }
         }
         loggingInfo['memories']['mood'] = moodLog
         if (logImageURL) {
@@ -330,6 +332,8 @@ document.addEventListener('DOMContentLoaded', function () {
         diary.entries.push(loggingInfo)
         updateEntryList()
 
+
+        logImageURL = null
         clearLogFrames()
     })
 
@@ -384,9 +388,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.querySelector('#people-memory-card').style.display = 'flex'
                 }
                 if ('mood' in data.memories) {
-                    let moodName = 'static/img/emoji/' + data.memories.mood.toLowerCase() + '.svg'
-                    moodMemoryImg.src = moodName
-                    document.querySelector('#mood-memory-card').style.display = 'flex'
+                    if (data.memories.mood != null) {
+                        let moodName = 'static/img/emoji/' + data.memories.mood.toLowerCase() + '.svg'
+                        moodMemoryImg.src = moodName
+                        document.querySelector('#mood-memory-card').style.display = 'flex'
+                    }
                 }
             }
     
