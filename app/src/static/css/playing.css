@@ -16,6 +16,14 @@
     z-index: 5;
 }
 
+#playing-share {
+    position: absolute;
+    width: 4vh;
+    top: 3vh;
+    left: 3vh;
+    z-index: 5;
+}
+
 #playing-image {
     background-color: #222;
     background-size: cover;

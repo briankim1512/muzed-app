@@ -217,6 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     exitLog.addEventListener('click', function () {
+        searchPreview.pause()
         clearLogFrames()
     })
 
@@ -323,6 +324,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Playing Frame Javascript
     let playingFrame = document.querySelector('#playing-frame')
     let playingExit = document.querySelector('#playing-exit')
+    let playingShare = document.querySelector('#playing-share')
     let playingAlbum = document.querySelector('#playing-album')
     let playingImage = document.querySelector('#playing-image')
     let playingStart = document.querySelector('#playing-start')
@@ -395,6 +397,13 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(function () {
             playingFrame.style.display = 'none'
         }, 400)
+    })
+
+    playingShare.addEventListener('click', function () {
+        navigator.share({
+            title: 'Muzed Log Share',
+            url: 'https://testrepo.net'
+          })
     })
 
     playingStart.addEventListener('click', function () {
