@@ -167,8 +167,11 @@ document.addEventListener('DOMContentLoaded', function () {
     let preFinishLog = document.querySelector('#pre-finish-log')
     
     let personInput = document.querySelector('#person-input')
-    let finishLog = document.querySelector('#finish-log')
     let peopleDetail = document.querySelector('#people-detail')
+    
+    let addImage = document.querySelector('#add-image')
+    
+    let finishLog = document.querySelector('#finish-log')
 
     let currentFrame = null
     let previousFrame = null
@@ -305,6 +308,12 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     })
 
+    // Add Image (RIGHT NOW IS URL ONLY)
+    let logImageURL = null
+    addImage.addEventListener('click', function() {
+        logImageURL = prompt('Please enter image URL')
+    })
+
     // Finish Logs
     finishLog.addEventListener('click', function() {
         loggingInfo['date'] = document.querySelector('.logging-dateinput').value
@@ -313,6 +322,9 @@ document.addEventListener('DOMContentLoaded', function () {
             description: peopleDetail.value
         }
         loggingInfo['memories']['mood'] = moodLog
+        if (logImageURL) {
+            loggingInfo['image'] = logImageURL
+        }
         loggingInfo['id'] = generateUID()
 
         diary.entries.push(loggingInfo)
