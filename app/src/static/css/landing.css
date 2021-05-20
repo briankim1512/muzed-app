@@ -26,7 +26,11 @@
 
 .landing-add {
     width: 12%;
-}    
+}
+
+.entry-uid {
+    display: none;
+}
 
 .diary-entry {
     box-sizing: border-box;

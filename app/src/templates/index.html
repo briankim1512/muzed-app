@@ -28,6 +28,7 @@
             </div>
             <div id="landing-diary" class="flex flex-vertical">
                 <div v-for="entry in entries" class="diary-entry flex flex-horizontal flex-spread">
+                    <p class="entry-uid">[[entry.id]]</p>
                     <p class="diary-entry-date">[[entry.date]]</p>
                     <div class="flex flex-horizontal flex-spaced">
                         <p class="diary-entry-song">[[entry.title]]</p>
@@ -150,43 +151,45 @@
         <!-- Playing Frame -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/playing.css' %}">
         <div id="playing-frame" class="frame flex-vertical flex-center flex-spread">
+            <img src="{% static 'img/log/exit.svg' %}" id="playing-exit">
             <div id="playing-image">
             </div>
             <div id="playing-album" class="flex flex-center">
                 <div id="playing-album-center"></div>
             </div>
             <div id="playing-controls" class="flex flex-horizontal flex-center flex-spaced">
-                <img src="{% static 'img/music/shuffle.svg' %}">
-                <img src="{% static 'img/music/previous.svg' %}">
-                <img src="{% static 'img/music/play.svg' %}">
-                <img src="{% static 'img/music/forward.svg' %}">
-                <img src="{% static 'img/music/repeat.svg' %}">
+                <img src="{% static 'img/music/shuffle.svg' %}" class="hidden">
+                <img src="{% static 'img/music/previous.svg' %}" class="hidden">
+                <img src="{% static 'img/music/play.svg' %}" id="playing-start">
+                <img src="{% static 'img/music/forward.svg' %}" class="hidden">
+                <img src="{% static 'img/music/repeat.svg' %}" class="hidden">
             </div>
             <div id="playing-subframe" class="flex flex-vertical flex-center flex-spread">
+
                 <div id="playing-subheader" class="flex flex-vertical flex-center">
                     <div id="playing-subframe-indicator"></div>
                     <div id="playing-subheader-options" class="flex flex-horizontal flex-spaced">
                         <p>LYRICS</p>
-                        <p>MY NOTE</p>
-                        <p>MEMORIES</p>
+                        <p id="playing-notes">MY NOTE</p>
+                        <p id="playing-memories">MEMORIES</p>
                     </div>
                 </div>
                 <div id="note-subframe" class="playing-subsubframe flex flex-vertical flex-spaced">
                     <img src="{% static 'img/music/note_start.svg' %}">
-                    <p></p>
+                    <p id="note-subframe-text"></p>
                     <img src="{% static 'img/music/note_end.svg' %}" class="note-end">
                 </div>
-                <div id="memory-subframe" class="playing-subsubframe flex flex-vertical">
+                <div id="memories-subframe" class="playing-subsubframe flex flex-vertical">
                     <div id="people-memory-card" class="memory-card">
                         <p class="memory-card-subtitle">PEOPLE RELATED TO THIS SONG</p>
                         <div v-for="name in list" id="people-memory-list">
-                            <p>[[ name ]]</p>
+                            <p>[[name]]</p>
                         </div>
-                        <p id="people-memory-description"></p>
+                        <p id="people-memory-description">[[description]]</p>
                     </div>
                     <div id="mood-memory-card" class="memory-card">
                         <p class="memory-card-subtitle">MOODS RELATED TO THIS SONG</p>
-                        <img src="">
+                        <img src="" id="mood-memory-img">
                     </div>
                     <div id="audio-memory-card" class="memory-card">
                         <p class="memory-card-subtitle">SOUNDS RELATED TO THIS SONG</p>

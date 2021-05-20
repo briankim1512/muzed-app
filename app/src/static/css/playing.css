@@ -1,5 +1,24 @@
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+#playing-frame {
+    overflow-y: hidden;
+    top: 100%;
+}
+
+#playing-exit {
+    position: absolute;
+    width: 4vh;
+    top: 3vh;
+    right: 3vh;
+    z-index: 5;
+}
+
 #playing-image {
     background-color: #222;
+    background-size: cover;
     width: 100%;
     height: 50%;
     border-bottom: 1px solid #222;
@@ -18,6 +37,10 @@
     background-size: cover;
     border-radius: 50%;
     z-index: 0;
+    animation-name: spin;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
 #playing-album-center {
@@ -47,6 +70,7 @@
     background-color: black;
     overflow: hidden;
     z-index: 2;
+    transition: 0.4s;
 }
 
 #playing-subframe-indicator {
@@ -72,11 +96,11 @@
     user-select: none;
 }
 
-#memory-subframe {
+#memories-subframe {
     overflow-y: scroll;
 }
 
-#memory-subframe::-webkit-scrollbar {
+#memories-subframe::-webkit-scrollbar {
     display: none;
 }
 
@@ -95,7 +119,7 @@
 #note-subframe p {
     position: absolute;
     width: 100%;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .note-end {
@@ -124,7 +148,7 @@
 
 #people-memory-description {
     color: white;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 #audio-memory-card audio {
