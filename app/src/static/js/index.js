@@ -186,19 +186,23 @@ document.addEventListener('DOMContentLoaded', function () {
         moodLog = null
         peopleList.list = []
         loggingInfo = {}
-        loggingFrame.style.opacity = 0
 
+        loggingFrame.style.opacity = 0
+        loggingSubframe2.style.opacity = 0
+
+        document.querySelector('.logging-music-title').innerHTML = 'Music Title'
+        document.querySelector('.logging-music-artist').innerHTML = 'Artist Name'
+        document.querySelector('.logging-music-album').src = "static/img/music-add.svg"
+        document.querySelector('#logging-story').value = ""
+        
         setTimeout(function () {
             previousLog.style.display = 'none'
             searchResult.style.display = 'none'
             loggingSearchAdd.style.display = 'none'
             loggingFrame.style.display = 'none'
-            loggingSearch.style.display = 'flex'
-            loggingSearch.style.opacity = 100
-            loggingSubframe1.style.display = 'none'
-            loggingSubframe1.style.opacity = 0
+            loggingSubframe1.style.display = 'flex'
+            loggingSubframe1.style.opacity = 100
             loggingSubframe2.style.display = 'none'
-            loggingSubframe2.style.opacity = 0
         }, 401)
     }
 
@@ -273,12 +277,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Pre Finish Logs
     preFinishLog.addEventListener('click', function() {
-        let loggingStory = document.querySelector('#logging-story')
         loggingInfo['date'] = new Date().toJSON().slice(0,10)
-        loggingInfo['note'] = loggingStory.value
+        loggingInfo['note'] = document.querySelector('#logging-story').value
         loggingInfo['memories'] = null
         loggingInfo['id'] = generateUID()
-        loggingStory.value = ""
 
         diary.entries.push(loggingInfo)
         updateEntryList()
