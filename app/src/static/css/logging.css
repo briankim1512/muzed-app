@@ -3,6 +3,7 @@
     display: none;
     opacity: 0%;
     transition: 0.4s;
+    z-index: 10;
 }
 
 #exit-log {
@@ -10,7 +11,7 @@
     width: 3vh;
     top: 8vh;
     right: 8vh;
-    z-index: 3;
+    z-index: 12;
 }
 
 #previous-log {
@@ -19,7 +20,7 @@
     width: 3vh;
     top: 8vh;
     left: 8vh;
-    z-index: 3;
+    z-index: 12;
 }
 
 #logging-subframe-1 {

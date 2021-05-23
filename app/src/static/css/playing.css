@@ -16,6 +16,14 @@
     z-index: 5;
 }
 
+#playing-edit {
+    position: absolute;
+    width: 4vh;
+    top: 43vh;
+    left: 3vh;
+    z-index: 2;
+}
+
 #playing-share {
     position: absolute;
     width: 4vh;

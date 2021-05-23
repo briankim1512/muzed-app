@@ -144,6 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
     loggingSubframe1.style.display = 'flex'
     
     landingAdd.addEventListener('click', function() {
+        loggingStatus = 'logging'
         loggingFrame.style.display = 'flex'
         setTimeout(function() {
             loggingFrame.style.opacity = '100%'
@@ -177,6 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     let personInput = document.querySelector('#person-input')
     let peopleDetail = document.querySelector('#people-detail')
+    let moodList = document.querySelectorAll('.mood-item')
     
     let addImage = document.querySelector('#add-image')
     
@@ -187,11 +189,37 @@ document.addEventListener('DOMContentLoaded', function () {
     
     let loggingInfo = {}
     let moodLog = null
+    let logImageURL = null
+
+    let loggingStatus = 'logging'
+
+    function setLogs (data) {
+        loggingInfo = data
+
+        document.querySelector('.logging-music-title').innerHTML = data.title
+        document.querySelector('.logging-music-artist').innerHTML = data.artist
+        document.querySelector('.logging-music-album').src = data.album
+        document.querySelector('#logging-story').value = data.note
+        if ('memories' in data) {
+            if ('mood' in data.memories) {
+                moodLog = data.memories.mood
+            }
+            if ('image' in data.memories) {
+                logImageURL = data.image
+            }
+            if ('people' in data.memories) {
+                peopleList.list = data.memories.people.list
+                peopleDetail.value = data.memories.people.description
+            }
+        }
+    }
 
     function clearLogFrames () {
+        loggingStatus = 'logging'
         currentFrame = loggingSearch
         previousFrame = null
         moodLog = null
+        logImageURL = null
         peopleList.list = []
         loggingInfo = {}
 
@@ -201,7 +229,8 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.logging-music-title').innerHTML = 'Music Title'
         document.querySelector('.logging-music-artist').innerHTML = 'Artist Name'
         document.querySelector('.logging-music-album').src = "static/img/music-add.svg"
-        document.querySelector('#logging-story').value = ""
+        document.querySelector('#logging-story').value = ''
+        peopleDetail.value = ''
         
         setTimeout(function () {
             previousLog.style.display = 'none'
@@ -245,6 +274,7 @@ document.addEventListener('DOMContentLoaded', function () {
         goToFrame(loggingSubframe1, loggingSearch)
     })
 
+    // Search Music
     searchInput.addEventListener('keyup', function(event) {
         if (event.keyCode==13) {
             searchNapster(searchInput.value).then(data => {
@@ -293,14 +323,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Pre Finish Logs
     preFinishLog.addEventListener('click', function() {
-        loggingInfo['date'] = new Date().toJSON().slice(0,10)
         loggingInfo['note'] = document.querySelector('#logging-story').value
-        loggingInfo['memories'] = null
-        loggingInfo['id'] = generateUID()
 
-        diary.entries.push(loggingInfo)
+        if (loggingStatus == 'logging') {
+            loggingInfo['date'] = new Date().toJSON().slice(0,10)
+            loggingInfo['memories'] = null
+            loggingInfo['id'] = generateUID()
+            diary.entries.push(loggingInfo)
+        } else if (loggingStatus == 'editing') {
+            let diaryIndex = diary.entries.findIndex(entry => entry['id'] == loggingInfo['id'])
+            diary.entries[diaryIndex] = loggingInfo
+            playEntry(loggingInfo)
+        }
+
         updateEntryList()
-
         clearLogFrames()
     })
 
@@ -323,7 +359,6 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     // Mood Select
-    let moodList = document.querySelectorAll('.mood-item')
     moodList.forEach(element => {
         element.addEventListener('click', function() {
             goBackFrame()
@@ -332,7 +367,6 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     // Add Image (RIGHT NOW IS URL ONLY)
-    let logImageURL = null
     addImage.addEventListener('click', function() {
         logImageURL = prompt('Please enter image URL')
     })
@@ -340,23 +374,32 @@ document.addEventListener('DOMContentLoaded', function () {
     // Finish Logs
     finishLog.addEventListener('click', function() {
         loggingInfo['date'] = document.querySelector('.logging-dateinput').value
+
+        // Check if inputs are there and append to data
         if (peopleList.list.length > 0) {
             loggingInfo['memories']['people'] = {
                 list: peopleList.list,
                 description: peopleDetail.value
             }
         }
-        loggingInfo['memories']['mood'] = moodLog
+        if (moodLog) {
+            loggingInfo['memories']['mood'] = moodLog
+        }
         if (logImageURL) {
             loggingInfo['image'] = logImageURL
         }
-        loggingInfo['id'] = generateUID()
 
-        diary.entries.push(loggingInfo)
+        // Check what kind of data manipulation should ensue
+        if (loggingStatus == 'logging') {
+            loggingInfo['id'] = generateUID()
+            diary.entries.push(loggingInfo)
+        } else if (loggingStatus == 'editing') {
+            let diaryIndex = diary.entries.findIndex(entry => entry['id'] == loggingInfo['id'])
+            diary.entries[diaryIndex] = loggingInfo
+            playEntry(loggingInfo)
+        }
+        
         updateEntryList()
-
-
-        logImageURL = null
         clearLogFrames()
     })
 
@@ -367,6 +410,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let playingFrame = document.querySelector('#playing-frame')
     let playingExit = document.querySelector('#playing-exit')
     let playingShare = document.querySelector('#playing-share')
+    let playingEdit = document.querySelector('#playing-edit')
     let playingAlbum = document.querySelector('#playing-album')
     let playingImage = document.querySelector('#playing-image')
     let playingStart = document.querySelector('#playing-start')
@@ -378,11 +422,14 @@ document.addEventListener('DOMContentLoaded', function () {
     let memoriesSubframe = document.querySelector('#memories-subframe')
     let notesSubframeText = document.querySelector('#note-subframe-text')
     let moodMemoryImg = document.querySelector('#mood-memory-img')
+
     let playingSubframeStatus = false
     let playingAudio = new Audio()
     let playingStatus = false
+    let playingData = null
 
     function playEntry (data) {
+        playingData = data
         playingFrame.style.display = 'flex'
         setTimeout(function() {
             playingFrame.style.top = '0%'
@@ -433,6 +480,7 @@ document.addEventListener('DOMContentLoaded', function () {
         memoriesSubframe.style.display = 'none'
     }
 
+    // Exit out of playing
     playingExit.addEventListener('click', function () {
         playingAudio.pause()
         playingFrame.style.top = '100%'
@@ -444,6 +492,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 400)
     })
 
+    // Share log
     playingShare.addEventListener('click', function () {
         navigator.share({
             title: 'Muzed Log Share',
@@ -451,6 +500,17 @@ document.addEventListener('DOMContentLoaded', function () {
           })
     })
 
+    // Editing log
+    playingEdit.addEventListener('click', function() {
+        loggingStatus = 'editing'
+        setLogs(playingData)
+        loggingFrame.style.display = 'flex'
+        setTimeout(function() {
+            loggingFrame.style.opacity = '100%'
+        }, 100)
+    })
+
+    // Playing or pausing log
     playingStart.addEventListener('click', function () {
         if (playingStatus == true) {
             playingAudio.pause()
@@ -465,6 +525,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 
+    // Opening Playing Subframe
     playingSubframeIndicator.addEventListener('click', function() {
         if (playingSubframeStatus == false) {
             playingSubframe.style.height = '85%'
@@ -477,6 +538,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 
+    // Open Notes
     playingNotes.addEventListener('click', function() {
         if (playingSubframeStatus == false) {
             playingSubframe.style.height = '85%'
@@ -486,6 +548,7 @@ document.addEventListener('DOMContentLoaded', function () {
         notesSubframe.style.display = 'flex'
     })
 
+    // Open Memories
     playingMemories.addEventListener('click', function() {
         if (playingSubframeStatus == false) {
             playingSubframe.style.height = '85%'
@@ -495,5 +558,7 @@ document.addEventListener('DOMContentLoaded', function () {
         memoriesSubframe.style.display = 'flex'
     })
 
+    ////////////////////////////////////////////////////
     // Sharing Frame Javascript
+    ////////////////////////////////////////////////////
 })
