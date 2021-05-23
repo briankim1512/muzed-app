@@ -45,6 +45,19 @@
             <!-- Header Options -->
             <img src="{% static 'img/log/back.svg' %}" id="previous-log">
             <img src="{% static 'img/log/exit.svg' %}" id="exit-log">
+            <!-- First Logging Frame -->
+            <div id="logging-subframe-1" class="subframe flex-vertical flex-center flex-spaced">
+                <h1 class="logging-title no-margin-bottom">Mandatory Field</h1>
+                <p class="logging-page no-margin-top">(1/2)</p>
+                <img src="{% static 'img/music-add.svg' %}" id="music-add" class="album-cover logging-music-album">
+                <p class="logging-music-title no-margin-top no-margin-bottom">Music Title</p>
+                <p class="logging-music-artist no-margin-top">Artist Name</p>
+                <textarea id="logging-story" class="logging-textarea logging-textinput" placeholder="What is the story behind this song?"></textarea>
+                <div class="logging-bottom flex flex-horizontal flex-spread">
+                    <button id="add-tag-log" class="log-first-option">Add Tag</button>
+                    <button id="pre-finish-log" class="log-first-option">Finish</button>
+                </div>
+            </div>
             <!-- Searching Frame -->
             <div id="logging-search" class="subframe flex-vertical flex-center flex-spaced">
                 <input type="text" id="logging-search-input" class="logging-textinput" placeholder="Search for your song">
@@ -55,19 +68,6 @@
                 </div>
                 <div id="logging-search-add" class="logging-bottom flex-horizontal flex-spaced">
                     <button id="add-search-log" class="log-first-option">Add</button>
-                </div>
-            </div>
-            <!-- First Logging Frame -->
-            <div id="logging-subframe-1" class="subframe flex-vertical flex-center flex-spaced">
-                <h1 class="logging-title no-margin-bottom">Mandatory Field</h1>
-                <p class="logging-page no-margin-top">(1/2)</p>
-                <img class="album-cover logging-music-album">
-                <p class="logging-music-title no-margin-top no-margin-bottom">Music Title</p>
-                <p class="logging-music-artist no-margin-top">Artist Name</p>
-                <textarea id="logging-story" class="logging-textarea logging-textinput" placeholder="What is the story behind this song?"></textarea>
-                <div class="logging-bottom flex flex-horizontal flex-spread">
-                    <button id="add-tag-log" class="log-first-option">Add Tag</button>
-                    <button id="pre-finish-log" class="log-first-option">Finish</button>
                 </div>
             </div>
             <!-- Second Logging Frame -->

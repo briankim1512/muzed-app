@@ -133,26 +133,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let landingAdd = document.querySelector('.landing-add')
     let loggingFrame = document.querySelector('#logging-frame')
-    let loggingSearch = document.querySelector('#logging-search')
-
-    loggingSearch.style.display = 'flex'
-
+    let loggingSubframe1 = document.querySelector('#logging-subframe-1')
+    
+    loggingSubframe1.style.display = 'flex'
+    
     landingAdd.addEventListener('click', function() {
         loggingFrame.style.display = 'flex'
         setTimeout(function() {
             loggingFrame.style.opacity = '100%'
         }, 100)
     })
-
+    
     // Logging Frame Javascript
-
+    
     let exitLog = document.querySelector('#exit-log')
     let previousLog = document.querySelector('#previous-log')
     
-    let loggingSubframe1 = document.querySelector('#logging-subframe-1')
+    let loggingSearch = document.querySelector('#logging-search')
     let loggingSubframe2 = document.querySelector('#logging-subframe-2')
     let taggingPeople = document.querySelector('#tagging-people')
     let taggingMood = document.querySelector('#tagging-mood')
+    let musicAdd = document.querySelector('#music-add')
     
     let loggingSearchAdd = document.querySelector('#logging-search-add')
     let searchInput = document.querySelector('#logging-search-input')
@@ -226,6 +227,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     previousLog.addEventListener('click', function () {
         goBackFrame()
+    })
+
+    musicAdd.addEventListener('click', function() {
+        goToFrame(loggingSubframe1, loggingSearch)
     })
 
     searchInput.addEventListener('keyup', function(event) {
