@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //////////////////////////////////////////////////// 
     // Landing Frame Javascript
     //////////////////////////////////////////////////// 
-    
+
     // !!! Dummy Data for testing  !!!
     let entries = [
         {
@@ -276,11 +276,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Add Additional Logs
     addTagLog.addEventListener('click', function() {
-        document.querySelector('.logging-dateinput').value = new Date().toJSON().slice(0,10)
-        loggingInfo['note'] = document.querySelector('#logging-story').value
-        loggingInfo['memories'] = {}
+        let albumStr = document.querySelector('.logging-music-album').src
+        albumStr = albumStr.substring((albumStr.length-13), albumStr.length)
 
-        goToFrame(loggingSubframe1, loggingSubframe2)
+        if (albumStr == 'music-add.svg' || document.querySelector('#logging-story').value == '') {
+            alert('Fill out all fields please!')
+        } else {
+            document.querySelector('.logging-dateinput').value = new Date().toJSON().slice(0,10)
+            loggingInfo['note'] = document.querySelector('#logging-story').value
+            loggingInfo['memories'] = {}
+
+            goToFrame(loggingSubframe1, loggingSubframe2)
+        }
     })
 
     // Pre Finish Logs
