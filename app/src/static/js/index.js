@@ -452,9 +452,13 @@ document.addEventListener('DOMContentLoaded', function () {
     playingStart.addEventListener('click', function () {
         if (playingStatus == true) {
             playingAudio.pause()
+            playingAlbum.style.animationPlayState = 'paused'
+            playingStart.src = 'static/img/music/play.svg'
             playingStatus = false
         } else {
             playingAudio.play()
+            playingAlbum.style.animationPlayState = 'running'
+            playingStart.src = 'static/img/music/pause.svg'
             playingStatus = true
         }
     })
