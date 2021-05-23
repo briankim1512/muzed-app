@@ -257,6 +257,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.querySelector('#search-artist').innerHTML = data.artist
                 document.querySelector('#search-album').src = data.album
                 searchPreview.src = data.preview
+                searchPreview.loop = true
                 searchPreview.play()
             })
         }
@@ -422,6 +423,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
     
             playingAudio.play()
+            playingAudio.loop = true
             playingStatus = true
         }, 10)
     }
