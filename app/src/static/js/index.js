@@ -271,6 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     musicAdd.addEventListener('click', function() {
+        previousLog.style.display = 'flex'
         goToFrame(loggingSubframe1, loggingSearch)
     })
 
@@ -300,7 +301,6 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.logging-music-album').src=loggingInfo.album
         
         searchPreview.pause()
-        previousLog.style.display = 'flex'
         
         goToFrame(loggingSearch, loggingSubframe1)
     })
@@ -309,6 +309,8 @@ document.addEventListener('DOMContentLoaded', function () {
     addTagLog.addEventListener('click', function() {
         let albumStr = document.querySelector('.logging-music-album').src
         albumStr = albumStr.substring((albumStr.length-13), albumStr.length)
+
+        previousLog.style.display = 'flex'
 
         if (albumStr == 'music-add.svg' || document.querySelector('#logging-story').value == '') {
             alert('Fill out all fields please!')
