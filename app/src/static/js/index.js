@@ -39,7 +39,10 @@ function generateUID () {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    //////////////////////////////////////////////////// 
     // Intro Frame Javascript
+    //////////////////////////////////////////////////// 
+
     let html = document.querySelector('html')
     let introButton = document.querySelector('.intro-btn')
     let introFrame = document.querySelector('#intro-frame')
@@ -54,7 +57,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 400)
     })
 
+    //////////////////////////////////////////////////// 
     // Landing Frame Javascript
+    //////////////////////////////////////////////////// 
+    
     // !!! Dummy Data for testing  !!!
     let entries = [
         {
@@ -144,7 +150,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 100)
     })
     
+    //////////////////////////////////////////////////// 
     // Logging Frame Javascript
+    //////////////////////////////////////////////////// 
     
     let exitLog = document.querySelector('#exit-log')
     let previousLog = document.querySelector('#previous-log')
@@ -344,7 +352,10 @@ document.addEventListener('DOMContentLoaded', function () {
         clearLogFrames()
     })
 
+    //////////////////////////////////////////////////// 
     // Playing Frame Javascript
+    //////////////////////////////////////////////////// 
+
     let playingFrame = document.querySelector('#playing-frame')
     let playingExit = document.querySelector('#playing-exit')
     let playingShare = document.querySelector('#playing-share')
