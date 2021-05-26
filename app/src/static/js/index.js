@@ -1,3 +1,35 @@
+let entries = [
+    {
+        id: generateUID(),
+        date: "2020-01-01",
+        title: "Bohemian Rhapsody",
+        artist: "Queen",
+        album: "http://static.rhap.com/img/170x170/7/7/1/4/12294177_170x170.jpg",
+        preview: "https://listen.hs.llnwd.net/g3/prvw/4/4/9/2/0/1448702944.mp3",
+        note: "The Bohemian Rhapsody, while widely known, has a special meaning for me as...",
+        image: "https://upload.wikimedia.org/wikipedia/commons/2/20/Bohemian_Rhapsody.jpg",
+        memories: {
+            people: {
+                list: ['Freddie Mercury'],
+                description: 'Short Description'
+            }
+        }
+    },
+    {
+        id: generateUID(),
+        date: "2020-01-01",
+        title: "I Want to Break Free",
+        artist: "Queen",
+        album: "http://static.rhap.com/img/170x170/0/6/1/4/24694160_170x170.jpg",
+        preview: "https://listen.hs.llnwd.net/g3/prvw/2/8/5/7/5/2312157582.mp3",
+        note: "This song's lyrics is relatable to nearly everyone and anyone...",
+        image: "https://cdn10.picryl.com/photo/1991/06/08/fireworks-light-up-the-night-sky-behind-the-washington-monument-at-the-conclusion-6783a8-1600.jpg",
+        memories: {
+            mood: 'HAPPY'
+        }
+    }
+]
+
 async function searchNapster (searchTerm = '') {
     const napsterKey = "YWUwOTA0ZmEtZWQwNS00YmUyLWFhNjEtZWEwMDNlYWViOWQ4"
     const searchURL = "http://api.napster.com/v2.2/search/verbose?query="
@@ -34,65 +66,76 @@ async function searchNapster (searchTerm = '') {
     return trackInfo
 }
 
+async function getUserLogs (userID) {
+    let userLogs = await fetch('/api', {
+        headers: {
+            "X-CSRFToken": csrfToken,
+            "Content-Type": "application/json"
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            'type': 'regular_get',
+            'userID': userID
+        })})
+        .then(response => response.json())
+
+    return userLogs
+}
+
+async function postUserLogs (userID, logs) {
+    await fetch('/api', {
+        headers: {
+            "X-CSRFToken": csrfToken,
+            "Content-Type": "application/json"
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            'type': 'regular_post',
+            'userID': userID,
+            'data': JSON.stringify(logs)
+        })
+    })
+}
+
+async function getSharedLog (sharedID) {
+    let logDetails = await fetch('/api', {
+        headers: {
+            "X-CSRFToken": csrfToken,
+            "Content-Type": "application/json"
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            'type': 'shared_get',
+            'sharedID': sharedID
+        })})
+        .then(response => response.json())
+    
+    return logDetails
+}
+
+async function createSharedLog (details) {
+    await fetch('/api', {
+        headers: {
+            "X-CSRFToken": csrfToken,
+            "Content-Type": "application/json"
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            'type': 'shared_post',
+            'data': JSON.stringify(details)
+        })
+    })
+}
+
 function generateUID () {
     return Date.now().toString(36) + Math.random().toString(36).substring(2)
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    //////////////////////////////////////////////////// 
-    // Intro Frame Javascript
-    //////////////////////////////////////////////////// 
-
-    let html = document.querySelector('html')
-    let introButton = document.querySelector('.intro-btn')
-    let introFrame = document.querySelector('#intro-frame')
-    let landingFrame = document.querySelector('#landing-frame')
-    
-    introButton.addEventListener('click', function () {
-        html.requestFullscreen()
-        introFrame.style.opacity = 0
-        landingFrame.style.display = 'flex'
-        setTimeout(function () {
-            introFrame.style.display = 'none'
-        }, 400)
-    })
 
     //////////////////////////////////////////////////// 
-    // Landing Frame Javascript
+    // Vue Javascript
     //////////////////////////////////////////////////// 
-
-    // !!! Dummy Data for testing  !!!
-    let entries = [
-        {
-            id: generateUID(),
-            date: "2020-01-01",
-            title: "Bohemian Rhapsody",
-            artist: "Queen",
-            album: "http://static.rhap.com/img/170x170/7/7/1/4/12294177_170x170.jpg",
-            preview: "https://listen.hs.llnwd.net/g3/prvw/4/4/9/2/0/1448702944.mp3",
-            note: "The Bohemian Rhapsody, while widely known, has a special meaning for me as...",
-            image: "https://upload.wikimedia.org/wikipedia/commons/2/20/Bohemian_Rhapsody.jpg",
-            memories: {
-                people: {
-                    list: ['Freddie Mercury'],
-                    description: 'Short Description'
-                }
-            }
-        },
-        {
-            id: generateUID(),
-            date: "2020-01-01",
-            title: "I Want to Break Free",
-            artist: "Queen",
-            album: "http://static.rhap.com/img/170x170/0/6/1/4/24694160_170x170.jpg",
-            preview: "https://listen.hs.llnwd.net/g3/prvw/2/8/5/7/5/2312157582.mp3",
-            note: "This song's lyrics is relatable to nearly everyone and anyone...",
-            image: "https://cdn10.picryl.com/photo/1991/06/08/fireworks-light-up-the-night-sky-behind-the-washington-monument-at-the-conclusion-6783a8-1600.jpg",
-            memories: {
-                mood: 'HAPPY'
-            }
-        }
-    ]
 
     let diary = new Vue({
         el: '#landing-diary',
@@ -119,19 +162,66 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 
+    //////////////////////////////////////////////////// 
+    // Intro Frame Javascript
+    //////////////////////////////////////////////////// 
+
+    let params = (new URL(document.location)).searchParams
+    let html = document.querySelector('html')
+    let introButton = document.querySelector('.intro-btn')
+    let introFrame = document.querySelector('#intro-frame')
+    let landingFrame = document.querySelector('#landing-frame')
+    let userID = params.get('user_id')
+    let sharedID = params.get('shared_id')
+
+    if (userID == null && sharedID == null) {
+        alert ('Please receive a URL with an ID from the admins')
+        html.style.display = 'none'
+    } else if (userID != null) {
+        getUserLogs(userID)
+        .then(userLogs => {
+            userLogs = userLogs.result
+            if (userLogs) {
+                userLogs = JSON.parse(userLogs)
+                diary.entries = userLogs
+                updateEntryList()
+            }
+        })
+    } else if (sharedID != null) {
+        introFrame.style.display = 'none'
+        playEntry(getSharedLog(sharedID))
+    }
+    
+    introButton.addEventListener('click', function () {
+        html.requestFullscreen()
+        introFrame.style.opacity = 0
+        landingFrame.style.display = 'flex'
+        setTimeout(function () {
+            introFrame.style.display = 'none'
+        }, 400)
+    })
+
+    //////////////////////////////////////////////////// 
+    // Landing Frame Javascript
+    //////////////////////////////////////////////////// 
+
     function updateEntryList () {
         setTimeout(function() {
             document.querySelectorAll('.diary-entry').forEach(element => {
                 let entryUID = element.childNodes[0].innerHTML
                 let entryIndex = diary.entries.findIndex(element => element.id == entryUID)
-                if (!('tagged' in diary.entries[entryIndex])) {
-                    element.addEventListener('click', function () {
-                        playEntry(diary.entries[entryIndex])
-                    })
-                    diary.entries[entryIndex]['tagged'] = true
-                }
-    
+                // if (!('tagged' in diary.entries[entryIndex])) {
+                //     element.addEventListener('click', function () {
+                //         playEntry(diary.entries[entryIndex])
+                //     })
+                //     diary.entries[entryIndex]['tagged'] = true
+                // }
+                element.addEventListener('click', function () {
+                    playEntry(diary.entries[entryIndex])
+                })
             })
+
+            postUserLogs(userID, diary.entries)
         }, 100)
     }
 
@@ -200,7 +290,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.logging-music-artist').innerHTML = data.artist
         document.querySelector('.logging-music-album').src = data.album
         document.querySelector('#logging-story').value = data.note
-        if ('memories' in data) {
+        if ('memories' in data && data.memories) {
             if ('mood' in data.memories) {
                 moodLog = data.memories.mood
             }
