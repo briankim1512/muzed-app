@@ -22,9 +22,9 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/landing.css' %}">
         <div id="landing-frame" class="frame flex-vertical flex-center flex-spread">
             <div id="landing-header" class="flex flex-horizontal flex-center flex-spread">
-                <img class="landing-header-icon no-select" src="{% static 'img/filter.svg' %}">
+                <img id="landing-filter" class="landing-header-icon no-select" src="{% static 'img/filter.svg' %}">
                 <h1 class="landing-title">DIARY</h1>
-                <img class="landing-header-icon no-select" src="{% static 'img/notice.svg' %}">
+                <img id="landing-notification" class="landing-header-icon no-select" src="{% static 'img/notice.svg' %}">
             </div>
             <div id="landing-diary" class="flex flex-vertical">
                 <div v-for="entry in entries" class="diary-entry flex flex-horizontal flex-spread">

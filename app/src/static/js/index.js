@@ -30,6 +30,9 @@ let entries = [
     }
 ]
 
+let completeEntries = []
+let unfinishedEntries = []
+
 async function searchNapster (searchTerm = '') {
     const napsterKey = "YWUwOTA0ZmEtZWQwNS00YmUyLWFhNjEtZWEwMDNlYWViOWQ4"
     const searchURL = "http://api.napster.com/v2.2/search/verbose?query="
@@ -183,8 +186,10 @@ document.addEventListener('DOMContentLoaded', function () {
             userLogs = userLogs.result
             if (userLogs) {
                 userLogs = JSON.parse(userLogs)
-                diary.entries = userLogs
+                completeEntries = userLogs
                 updateEntryList()
+            } else {
+                completeEntries = entries
             }
         })
     } else if (sharedID != null) {
@@ -206,30 +211,39 @@ document.addEventListener('DOMContentLoaded', function () {
     //////////////////////////////////////////////////// 
 
     function updateEntryList () {
+        diary.entries = completeEntries
+
         setTimeout(function() {
             document.querySelectorAll('.diary-entry').forEach(element => {
                 let entryUID = element.childNodes[0].innerHTML
                 let entryIndex = diary.entries.findIndex(element => element.id == entryUID)
-                // if (!('tagged' in diary.entries[entryIndex])) {
-                //     element.addEventListener('click', function () {
-                //         playEntry(diary.entries[entryIndex])
-                //     })
-                //     diary.entries[entryIndex]['tagged'] = true
-                // }
                 element.addEventListener('click', function () {
                     playEntry(diary.entries[entryIndex])
                 })
             })
 
-            postUserLogs(userID, diary.entries)
+            unfinishedEntries = completeEntries.filter(({memories}) => memories === null)
+            postUserLogs(userID, completeEntries)
         }, 100)
+    }
+
+    function filterLogs() {
+        diary.entries = unfinishedEntries
+    }
+
+    function allLogs() {
+        diary.entries = completeEntries
+        updateEntryList()
     }
 
     updateEntryList()
 
+    let logsFiltered = false
     let landingAdd = document.querySelector('.landing-add')
     let loggingFrame = document.querySelector('#logging-frame')
+    let landingFilter = document.querySelector('#landing-filter')
     let loggingSubframe1 = document.querySelector('#logging-subframe-1')
+    let landingNotification = document.querySelector('#landing-notification')
     
     loggingSubframe1.style.display = 'flex'
     
@@ -239,6 +253,24 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(function() {
             loggingFrame.style.opacity = '100%'
         }, 100)
+    })
+
+    landingFilter.addEventListener('click', function() {
+        if (logsFiltered == false) {
+            filterLogs()
+            logsFiltered = true
+        } else {
+            allLogs()
+            logsFiltered = false
+        }
+    })
+
+    landingNotification.addEventListener('click', function () {
+        if (unfinishedEntries.length > 0) {
+            alert('You have unfinished logs!')
+        } else {
+            alert('All logs are done!')
+        }
     })
     
     //////////////////////////////////////////////////// 
@@ -421,10 +453,10 @@ document.addEventListener('DOMContentLoaded', function () {
             loggingInfo['date'] = new Date().toJSON().slice(0,10)
             loggingInfo['memories'] = null
             loggingInfo['id'] = generateUID()
-            diary.entries.push(loggingInfo)
+            completeEntries.push(loggingInfo)
         } else if (loggingStatus == 'editing') {
-            let diaryIndex = diary.entries.findIndex(entry => entry['id'] == loggingInfo['id'])
-            diary.entries[diaryIndex] = loggingInfo
+            let diaryIndex = completeEntries.findIndex(entry => entry['id'] == loggingInfo['id'])
+            completeEntries[diaryIndex] = loggingInfo
             playEntry(loggingInfo)
         }
 
@@ -484,10 +516,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // Check what kind of data manipulation should ensue
         if (loggingStatus == 'logging') {
             loggingInfo['id'] = generateUID()
-            diary.entries.push(loggingInfo)
+            completeEntries.push(loggingInfo)
         } else if (loggingStatus == 'editing') {
-            let diaryIndex = diary.entries.findIndex(entry => entry['id'] == loggingInfo['id'])
-            diary.entries[diaryIndex] = loggingInfo
+            let diaryIndex = completeEntries.findIndex(entry => entry['id'] == loggingInfo['id'])
+            completeEntries[diaryIndex] = loggingInfo
             playEntry(loggingInfo)
         }
         
