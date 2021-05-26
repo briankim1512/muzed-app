@@ -165,6 +165,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 
+    let shareInfo = new Vue({
+        el: '#share-header',
+        delimiters: ['[[',']]'],
+        data: {
+            shareName: '',
+            shareArtist: ''
+        }
+    })
+
     //////////////////////////////////////////////////// 
     // Intro Frame Javascript
     //////////////////////////////////////////////////// 
@@ -448,6 +457,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // Pre Finish Logs
     preFinishLog.addEventListener('click', function() {
         loggingInfo['note'] = document.querySelector('#logging-story').value
+        
+        if (document.querySelector('#logging-story').value == '') {
+            alert('Fill out all required fields!')
+            return
+        }
 
         if (loggingStatus == 'logging') {
             loggingInfo['date'] = new Date().toJSON().slice(0,10)
@@ -616,14 +630,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 400)
     })
 
-    // Share log
-    playingShare.addEventListener('click', function () {
-        navigator.share({
-            title: 'Muzed Log Share',
-            url: 'https://testrepo.net'
-          })
-    })
-
     // Editing log
     playingEdit.addEventListener('click', function() {
         loggingStatus = 'editing'
@@ -685,4 +691,34 @@ document.addEventListener('DOMContentLoaded', function () {
     ////////////////////////////////////////////////////
     // Sharing Frame Javascript
     ////////////////////////////////////////////////////
+
+    let shareFrame = document.querySelector('#share-frame')
+    let shareExit = document.querySelector('#share-exit')
+    let shareImage = document.querySelector('#share-image')
+    let shareAlbum = document.querySelector('#share-album')
+
+    // Share log
+    playingShare.addEventListener('click', function () {
+        shareFrame.style.display = 'flex'
+        shareInfo.shareName = playingData.title
+        shareInfo.shareArtist = playingData.artist
+        shareImage.style.backgroundImage = 'url(' + playingData.image + ')'
+        shareAlbum.style.backgroundImage = 'url(' + playingData.album + ')'
+
+        setTimeout(function() {
+            shareFrame.style.opacity = '100%'
+        }, 10)
+    })
+    
+    shareExit.addEventListener('click', function () {
+        shareFrame.style.opacity = '0%'
+        setTimeout(function () {
+            shareFrame.style.display = 'none'
+        }, 400)
+    })
+
+    // navigator.share({
+    //     title: 'Muzed Log Share',
+    //     url: 'https://testrepo.net'
+    //   })
 })

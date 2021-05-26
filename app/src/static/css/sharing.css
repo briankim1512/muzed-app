@@ -1,0 +1,76 @@
+#share-frame {
+    transition: 0.4s;
+    opacity: 0%;
+    background-color: black;
+    z-index: 100;
+}
+
+#share-header {
+    padding: 0px 40px;
+    text-align: center;
+}
+
+#share-header h1 {
+    margin-top: 5vh;
+    font-family: serif;
+}
+
+#share-content {
+    position: relative;
+    top: -10vh;
+}
+
+#share-footer {
+    margin-bottom: 10vh;
+}
+
+#share-exit {
+    position: absolute;
+    top: 6vh;
+    left: 5vh;
+    height: 3vh;
+}
+
+#share-image {
+    height: 30vh;
+    width: 30vh;
+    background-color: #222;
+    background-size: cover;
+    z-index: 105;
+}
+
+#share-album {
+    top: 50%;
+    position: absolute;
+    width: 90%;
+    padding-top: 90%;
+    background-color: #555;
+    background-image: url(sharing.css);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+    z-index: 50;
+    animation-name: spin;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+#share-album-center {
+    position: absolute;
+    top: 35%;
+    width: 30%;
+    height: 30%;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.share-btn {
+    background: none;
+    border: 0.2ch solid;
+    border-radius: 0.5ch;
+    padding: 5px 13px;
+    font-size: 1.2em;
+    font-family: system-ui;
+    color: rgb(204, 195, 171);
+}

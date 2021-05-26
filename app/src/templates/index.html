@@ -203,26 +203,25 @@
         </div>
 
         <!-- Sharing Frame -->
-        <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/sharing.css' %}">
-        <div id="sharing-frame" class="frame flex-vertical flex-center flex-spread">
-            <div id="landing-header" class="flex flex-horizontal flex-center flex-spread">
-                <img class="landing-header-icon no-select" src="{% static 'img/filter.svg' %}">
-                <h1 class="landing-title">HEADER</h1>
-                <img class="landing-header-icon no-select" src="{% static 'img/notice.svg' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/sharing.css' %}">
+        <div id="share-frame" class="frame flex-vertical flex-center flex-spread">
+            <img src="{% static 'img/log/exit.svg' %}" id="share-exit">
+            <div id="share-header" class="flex flex-vertical flex-center flex-spaced">
+                <h1>PRESENT LOG</h1>
+                <p>Present your dearest memory to your friends and families</p>
+                <p>You are sharing "[[shareName]]" by [[shareArtist]]</p>
             </div>
-            <div id="landing-diary" class="flex flex-vertical">
-                <div v-for="entry in entries" class="diary-entry flex flex-horizontal flex-spread">
-                    <p class="diary-entry-date">[[entry.date]]</p>
-                    <div class="flex flex-horizontal flex-spaced">
-                        <p class="diary-entry-song">[[entry.songName]]</p>
-                        <p class="diary-entry-song-space">-</p>
-                        <p class="diary-entry-song">[[entry.songArtist]]</p>
-                    </div>
+            <div id="share-content" class="flex flex-center">
+                <div id="share-image"></div>
+                <div id="share-album" class="flex flex-center">
+                    <div id="share-album-center"></div>
                 </div>
             </div>
-            <img class="landing-add no-select" src="{% static 'img/add.svg' %}">
-            <div class="flex flex-horizontal flex-center"></div>
-        </div> -->
+            <div id="share-footer">
+                <!-- <button id="share-preview" class="share-btn">Preview</button> -->
+                <button id="share-finish" class="share-btn">Share</button>
+            </div>
+        </div>
 
         <!-- Load CSRF -->
         {% csrf_token %}
