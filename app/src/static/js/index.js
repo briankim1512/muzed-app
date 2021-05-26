@@ -116,7 +116,7 @@ async function getSharedLog (sharedID) {
     return logDetails
 }
 
-async function createSharedLog (details) {
+async function createSharedLog (uid, details) {
     await fetch('/api', {
         headers: {
             "X-CSRFToken": csrfToken,
@@ -125,6 +125,7 @@ async function createSharedLog (details) {
         method: 'POST',
         body: JSON.stringify({
             'type': 'shared_post',
+            'uid': uid,
             'data': JSON.stringify(details)
         })
     })
@@ -203,7 +204,13 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     } else if (sharedID != null) {
         introFrame.style.display = 'none'
-        playEntry(getSharedLog(sharedID))
+        getSharedLog(sharedID)
+        .then(logDetails => {
+            playEntry(JSON.parse(logDetails.result))
+            setTimeout(function() {
+                pauseLog()
+            }, 100)
+        })
     }
     
     introButton.addEventListener('click', function () {
@@ -607,10 +614,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
     
-            playingAudio.play()
             playingAudio.loop = true
-            playingStatus = true
+            playLog()
         }, 10)
+    }
+
+    function pauseLog() {
+        playingAudio.pause()
+        playingAlbum.style.animationPlayState = 'paused'
+        playingStart.src = 'static/img/music/play.svg'
+        playingStatus = false
+    }
+
+    function playLog() {
+        playingAudio.play()
+        playingAlbum.style.animationPlayState = 'running'
+        playingStart.src = 'static/img/music/pause.svg'
+        playingStatus = true
     }
 
     function clearPlayingSubframes () {
@@ -643,15 +663,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // Playing or pausing log
     playingStart.addEventListener('click', function () {
         if (playingStatus == true) {
-            playingAudio.pause()
-            playingAlbum.style.animationPlayState = 'paused'
-            playingStart.src = 'static/img/music/play.svg'
-            playingStatus = false
+            pauseLog()
         } else {
-            playingAudio.play()
-            playingAlbum.style.animationPlayState = 'running'
-            playingStart.src = 'static/img/music/pause.svg'
-            playingStatus = true
+            playLog()
         }
     })
 
@@ -696,6 +710,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let shareExit = document.querySelector('#share-exit')
     let shareImage = document.querySelector('#share-image')
     let shareAlbum = document.querySelector('#share-album')
+    let shareFinish = document.querySelector('#share-finish')
 
     // Share log
     playingShare.addEventListener('click', function () {
@@ -708,6 +723,20 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(function() {
             shareFrame.style.opacity = '100%'
         }, 10)
+    })
+
+    shareFinish.addEventListener('click', function () {
+        let sharedUID = generateUID()
+        let originURL = (new URL(window.location)).origin
+        let sharedURL = originURL + '?shared_id=' + sharedUID
+        console.log(sharedURL)
+
+        createSharedLog(sharedUID, playingData)
+
+        navigator.share({
+            title: 'Muzed Log Share',
+            url: sharedURL
+        })
     })
     
     shareExit.addEventListener('click', function () {

@@ -30,13 +30,12 @@ def api(request):
             new_user_info.save()
 
     if request['type'] == 'shared_get':
-        log_info = SharedLogs.objects.get(log_id__exact=request['logID'])
+        log_info = SharedLogs.objects.get(log_id__exact=request['sharedID'])
         response = {'result': log_info.log_details}
 
     if request['type'] == 'shared_post':
-        log_info = SharedLogs.objects.get(log_id__exact=request['logID'])
-        log_info.log_details = request['data']
-        log_info.save()
+        shared_log = SharedLogs(log_id=request['uid'], log_details=request['data'])
+        shared_log.save()
         response = {'result': 'success'}
 
     return JsonResponse(response)
