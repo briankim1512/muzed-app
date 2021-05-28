@@ -557,6 +557,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let playingExit = document.querySelector('#playing-exit')
     let playingShare = document.querySelector('#playing-share')
     let playingEdit = document.querySelector('#playing-edit')
+    let playingTrash = document.querySelector('#playing-trash')
     let playingAlbum = document.querySelector('#playing-album')
     let playingImage = document.querySelector('#playing-image')
     let playingStart = document.querySelector('#playing-start')
@@ -640,8 +641,7 @@ document.addEventListener('DOMContentLoaded', function () {
         memoriesSubframe.style.display = 'none'
     }
 
-    // Exit out of playing
-    playingExit.addEventListener('click', function () {
+    function exitPlaying () {
         playingAudio.pause()
         playingFrame.style.top = '100%'
         playingSubframe.style.height = '12%'
@@ -650,8 +650,13 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(function () {
             playingFrame.style.display = 'none'
         }, 400)
-    })
+    }
 
+    // Exit out of playing
+    playingExit.addEventListener('click', function () {
+        exitPlaying()
+    })
+    
     // Editing log
     playingEdit.addEventListener('click', function() {
         loggingStatus = 'editing'
@@ -660,6 +665,12 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(function() {
             loggingFrame.style.opacity = '100%'
         }, 100)
+    })
+    
+    playingTrash.addEventListener('click', function() {
+        completeEntries = completeEntries.filter(entry => entry.id != playingData.id)
+        updateEntryList()
+        exitPlaying()
     })
 
     // Playing or pausing log
