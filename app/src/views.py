@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from src.models import UserInfo, SharedLogs
+from src.models import UserInfo, SharedLogs, LogImages
 import json
 
 # Create your views here.
@@ -37,5 +37,17 @@ def api(request):
         shared_log = SharedLogs(log_id=request['uid'], log_details=request['data'])
         shared_log.save()
         response = {'result': 'success'}
+
+    return JsonResponse(response)
+
+def upload_image(request):
+    response = {'result': 'failed'}
+
+    log_image = LogImages(image_id=request.POST.get('image_id'), image_file=request.FILES['image_file'])
+    log_image.save()
+    response = {
+        'result': 'success',
+        'url': log_image.image_file.url
+    }
 
     return JsonResponse(response)

@@ -8,3 +8,7 @@ class UserInfo(models.Model):
 class SharedLogs(models.Model):
     log_id = models.CharField(primary_key=True, max_length=30)
     log_details = models.TextField()
+
+class LogImages(models.Model):
+    image_id = models.CharField(primary_key=True, max_length=30)
+    image_file = models.FileField()

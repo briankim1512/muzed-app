@@ -131,6 +131,22 @@ async function createSharedLog (uid, details) {
     })
 }
 
+async function uploadImage (file) {
+    let formData = new FormData()
+    formData.append('image_id', generateUID())
+    formData.append('image_file', file)
+
+    let imageDetails = await fetch('/upload_image', {
+        headers: {
+            "X-CSRFToken": csrfToken
+        },
+        method: 'POST',
+        body: formData
+        }).then(response => response.json())
+    
+    return imageDetails
+}
+
 function generateUID () {
     return Date.now().toString(36) + Math.random().toString(36).substring(2)
 }
@@ -307,6 +323,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let searchPreview = new Audio()
     let searchResult = document.querySelector('#search-result')
     let addSearchLog = document.querySelector('#add-search-log')
+    let logImageInput = document.querySelector('#log-image-input')
 
     let goTaggingPeople = document.querySelector('#go-tagging-people')
     let goTaggingMood = document.querySelector('#go-tagging-mood')
@@ -514,9 +531,12 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     })
 
-    // Add Image (RIGHT NOW IS URL ONLY)
-    addImage.addEventListener('click', function() {
-        logImageURL = prompt('Please enter image URL')
+    // Add Image
+    logImageInput.addEventListener('change', function () {
+        uploadImage(this.files[0])
+            .then(imageDetails => {
+                logImageURL = imageDetails.url
+            })
     })
 
     // Finish Logs

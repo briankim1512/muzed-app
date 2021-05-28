@@ -91,9 +91,10 @@
                 </div>
                 <div class="tag-image flex flex-vertical">
                     <p class="tag-text">Photos</p>
-                    <div id="add-image" class="flex flex-center">
+                    <label id="add-image" class="flex flex-center">
                         <img src="{% static 'img/plus.svg' %}">
-                    </div>
+                        <input type="file" id="log-image-input" class="hidden">
+                    </label>
                 </div>
                 <div class="tag-audio flex flex-vertical">
                     <p class="tag-text">Audio Recording</p>
