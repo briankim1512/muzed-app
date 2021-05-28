@@ -354,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function clearLogFrames () {
         loggingStatus = 'logging'
-        currentFrame = loggingSearch
+        currentFrame = loggingSubframe1
         previousFrame = null
         moodLog = null
         logImageURL = null
@@ -373,6 +373,8 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(function () {
             previousLog.style.display = 'none'
             searchResult.style.display = 'none'
+            loggingSearch.style.display = 'none'
+            loggingSearch.style.opacity = 0
             loggingSearchAdd.style.display = 'none'
             loggingFrame.style.display = 'none'
             loggingSubframe1.style.display = 'flex'
