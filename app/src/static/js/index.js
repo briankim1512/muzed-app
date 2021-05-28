@@ -427,6 +427,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.querySelector('#search-album').src = data.album
                 searchPreview.src = data.preview
                 searchPreview.loop = true
+                searchPreview.volume = 0.6
                 searchPreview.play()
             })
         }
@@ -581,6 +582,8 @@ document.addEventListener('DOMContentLoaded', function () {
     
             playingAlbum.style.backgroundImage = 'url(' + data.album + ')'
             playingAudio.src = data.preview
+            playingAudio.volume = 0.6
+            playingAudio.loop = true
             notesSubframeText.innerHTML = data.note
     
             // Set Image
@@ -614,7 +617,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
     
-            playingAudio.loop = true
             playLog()
         }, 10)
     }
