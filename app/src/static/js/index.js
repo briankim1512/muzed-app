@@ -332,6 +332,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let preFinishLog = document.querySelector('#pre-finish-log')
     
     let personInput = document.querySelector('#person-input')
+    let personInputButton = document.querySelector('#person-input-button')
     let peopleDetail = document.querySelector('#people-detail')
     let moodList = document.querySelectorAll('.mood-item')
     
@@ -521,6 +522,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (event.keyCode==13) {
             peopleList.list.push(personInput.value)
         }
+    })
+
+    personInputButton.addEventListener('click', function() {
+        peopleList.list.push(personInput.value)
     })
 
     // Mood Select

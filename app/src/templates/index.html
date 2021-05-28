@@ -96,7 +96,7 @@
                         <input type="file" id="log-image-input" class="hidden">
                     </label>
                 </div>
-                <div class="tag-audio flex flex-vertical">
+                <div class="tag-audio flex flex-vertical hidden">
                     <p class="tag-text">Audio Recording</p>
                     <div id="audio-record" class="flex flex-horizontal flex-spread">
                         <img src="{% static 'img/record.svg' %}">
@@ -108,9 +108,10 @@
                 </div>
             </div>
             <!-- People Tagging Frame -->
-            <div id="tagging-people" class="subframe flex-vertical flex-center flex-spread">
+            <div id="tagging-people" class="subframe flex-vertical flex-center flex-spaced">
                 <h1 class="logging-title no-margin-bottom">Add People Tag</h1>
                 <input type="text" id="person-input" class="logging-textinput" placeholder="Add Person's Name">
+                <button id="person-input-button">Add Person</button>
                 <div id="people-list">
                     <ul v-for="person in list">
                         <li>[[person]]</li>

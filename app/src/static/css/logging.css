@@ -60,12 +60,23 @@
 
 #people-list {
     width: 80%;
-    height: 30%;
+    height: 25%;
     overflow-y: scroll;
 }
 
 #people-list::-webkit-scrollbar {
     display:none;
+}
+
+#person-input-button {
+    position: relative;
+    top: -2vh;
+    padding: 5px 15px;
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 10px;
+    color: white;
+    width: 80%;
 }
 
 .album-cover {
