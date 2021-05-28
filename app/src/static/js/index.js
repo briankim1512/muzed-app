@@ -729,14 +729,22 @@ document.addEventListener('DOMContentLoaded', function () {
         let sharedUID = generateUID()
         let originURL = (new URL(window.location)).origin
         let sharedURL = originURL + '?shared_id=' + sharedUID
-        console.log(sharedURL)
+        let copyTarget = document.createElement('textarea')
 
         createSharedLog(sharedUID, playingData)
 
-        navigator.share({
-            title: 'Muzed Log Share',
-            url: sharedURL
-        })
+        copyTarget.value = sharedURL
+        document.body.appendChild(copyTarget)
+        copyTarget.select()
+        document.execCommand('copy')
+        document.body.removeChild(copyTarget)
+
+        alert('Link has been copied!')
+
+        // navigator.share({
+        //     title: 'Muzed Log Share',
+        //     url: sharedURL
+        // })
     })
     
     shareExit.addEventListener('click', function () {
@@ -745,9 +753,4 @@ document.addEventListener('DOMContentLoaded', function () {
             shareFrame.style.display = 'none'
         }, 400)
     })
-
-    // navigator.share({
-    //     title: 'Muzed Log Share',
-    //     url: 'https://testrepo.net'
-    //   })
 })
