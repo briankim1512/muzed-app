@@ -323,6 +323,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     let loggingSearchAdd = document.querySelector('#logging-search-add')
     let searchInput = document.querySelector('#logging-search-input')
+    let searchInputButton = document.querySelector('#search-input-button')
     let searchPreview = new Audio()
     let searchResult = document.querySelector('#search-result')
     let addSearchLog = document.querySelector('#add-search-log')
@@ -338,8 +339,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let personInputButton = document.querySelector('#person-input-button')
     let peopleDetail = document.querySelector('#people-detail')
     let moodList = document.querySelectorAll('.mood-item')
-    
-    let addImage = document.querySelector('#add-image')
     
     let finishLog = document.querySelector('#finish-log')
 
@@ -418,6 +417,23 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 100)
     }
 
+    function searchForMusic () {
+        searchNapster(searchInput.value).then(data => {
+            searchResult.style.display = 'flex'
+            loggingSearchAdd.style.display = 'flex'
+
+            loggingInfo = data
+
+            document.querySelector('#search-title').innerHTML = data.title
+            document.querySelector('#search-artist').innerHTML = data.artist
+            document.querySelector('#search-album').src = data.album
+            searchPreview.src = data.preview
+            searchPreview.loop = true
+            searchPreview.volume = 0.6
+            searchPreview.play()
+        })
+    }
+
     function goBackFrame () {
         goToFrame(currentFrame, previousFrame)
     }
@@ -428,6 +444,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     previousLog.addEventListener('click', function () {
+        searchPreview.pause()
         goBackFrame()
     })
 
@@ -439,21 +456,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // Search Music
     searchInput.addEventListener('keyup', function(event) {
         if (event.keyCode==13) {
-            searchNapster(searchInput.value).then(data => {
-                searchResult.style.display = 'flex'
-                loggingSearchAdd.style.display = 'flex'
-
-                loggingInfo = data
-
-                document.querySelector('#search-title').innerHTML = data.title
-                document.querySelector('#search-artist').innerHTML = data.artist
-                document.querySelector('#search-album').src = data.album
-                searchPreview.src = data.preview
-                searchPreview.loop = true
-                searchPreview.volume = 0.6
-                searchPreview.play()
-            })
+            searchForMusic()
         }
+    })
+
+    searchInputButton.addEventListener('click', function() {
+        searchForMusic()
     })
 
     // Search To Log
