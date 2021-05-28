@@ -261,10 +261,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function filterLogs() {
         diary.entries = unfinishedEntries
+        landingTitle.innerText = 'UNFINISHED'
     }
 
     function allLogs() {
         diary.entries = completeEntries
+        landingTitle.innerText = 'DIARY'
         updateEntryList()
     }
 
@@ -272,6 +274,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let logsFiltered = false
     let landingAdd = document.querySelector('.landing-add')
+    let landingTitle = document.querySelector('.landing-title')
     let loggingFrame = document.querySelector('#logging-frame')
     let landingFilter = document.querySelector('#landing-filter')
     let loggingSubframe1 = document.querySelector('#logging-subframe-1')
