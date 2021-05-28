@@ -6,6 +6,36 @@
     z-index: 210;
 }
 
+#logging-exit-frame {
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+#logging-exit-subframe {
+    position: fixed;
+    top: calc(50vh - 22vh);
+    padding: 10px 0px;
+    border-radius: 10px;
+    background: #222;
+    width: 60%;
+    height: 25vh;
+}
+
+#logging-exit-frame button {
+    width: 100%;
+    background-color: #CCC3AB;
+    border: 1px solid #CCC3AB;
+    color: white;
+    padding: 5px 15px;
+    margin: 1px 0px;
+}
+
+#logging-exit-frame h2 {
+    text-align: center;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
 #exit-log {
     position: absolute;
     width: 3vh;

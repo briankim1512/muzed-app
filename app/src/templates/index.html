@@ -41,6 +41,14 @@
 
         <!-- Logging Frame -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/logging.css' %}">
+        <div id="logging-exit-frame" class="frame flex-vertical flex-center">
+            <div id="logging-exit-subframe" class="frame flex flex-vertical flex-center">
+                <h2>Are you sure you want to exit?</h2>
+                <button id="logging-exit-later">Add Later</button>
+                <button id="logging-exit-discard">Discard</button>
+                <button id="logging-exit-return">Return</button>
+            </div>
+        </div>
         <div id="logging-frame" class="frame flex flex-vertical flex-center">
             <!-- Header Options -->
             <img src="{% static 'img/log/back.svg' %}" id="previous-log">

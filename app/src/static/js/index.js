@@ -315,6 +315,11 @@ document.addEventListener('DOMContentLoaded', function () {
     let exitLog = document.querySelector('#exit-log')
     let previousLog = document.querySelector('#previous-log')
     
+    let loggingExitFrame = document.querySelector('#logging-exit-frame')
+    let loggingExitLater = document.querySelector('#logging-exit-later')
+    let loggingExitDiscard = document.querySelector('#logging-exit-discard')
+    let loggingExitReturn = document.querySelector('#logging-exit-return')
+
     let loggingSearch = document.querySelector('#logging-search')
     let loggingSubframe2 = document.querySelector('#logging-subframe-2')
     let taggingPeople = document.querySelector('#tagging-people')
@@ -439,7 +444,27 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     exitLog.addEventListener('click', function () {
+        loggingExitFrame.style.display = 'flex'
+    })
+
+    loggingExitReturn.addEventListener('click', function () {
+        loggingExitFrame.style.display = 'none'
+    })
+
+    loggingExitDiscard.addEventListener('click', function () {
+        loggingExitFrame.style.display = 'none'
         searchPreview.pause()
+        clearLogFrames()
+    })
+
+    loggingExitLater.addEventListener('click', function () {
+        loggingExitFrame.style.display = 'none'
+        loggingInfo['note'] = document.querySelector('#logging-story').value
+        loggingInfo['date'] = new Date().toJSON().slice(0,10)
+        loggingInfo['memories'] = null
+        loggingInfo['id'] = generateUID()
+        completeEntries.push(loggingInfo)
+        updateEntryList()
         clearLogFrames()
     })
 
