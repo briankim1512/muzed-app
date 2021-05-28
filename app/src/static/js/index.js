@@ -511,6 +511,9 @@ document.addEventListener('DOMContentLoaded', function () {
             let diaryIndex = completeEntries.findIndex(entry => entry['id'] == loggingInfo['id'])
             completeEntries[diaryIndex] = loggingInfo
             playEntry(loggingInfo)
+        } else if (loggingStatus == 'sharing') {
+            shareData = loggingInfo
+            loggingInfo = playingData
         }
 
         updateEntryList()
@@ -581,6 +584,9 @@ document.addEventListener('DOMContentLoaded', function () {
             let diaryIndex = completeEntries.findIndex(entry => entry['id'] == loggingInfo['id'])
             completeEntries[diaryIndex] = loggingInfo
             playEntry(loggingInfo)
+        } else if (loggingStatus == 'sharing') {
+            shareData = loggingInfo
+            loggingInfo = playingData
         }
         
         updateEntryList()
@@ -759,21 +765,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let shareFrame = document.querySelector('#share-frame')
     let shareExit = document.querySelector('#share-exit')
+    let shareEdit = document.querySelector('#share-edit')
     let shareImage = document.querySelector('#share-image')
     let shareAlbum = document.querySelector('#share-album')
     let shareFinish = document.querySelector('#share-finish')
+    let shareData = {}
 
     // Share log
     playingShare.addEventListener('click', function () {
+        shareData = JSON.parse(JSON.stringify(playingData))
         shareFrame.style.display = 'flex'
-        shareInfo.shareName = playingData.title
-        shareInfo.shareArtist = playingData.artist
-        shareImage.style.backgroundImage = 'url(' + playingData.image + ')'
-        shareAlbum.style.backgroundImage = 'url(' + playingData.album + ')'
+        shareInfo.shareName = shareData.title
+        shareInfo.shareArtist = shareData.artist
+        shareImage.style.backgroundImage = 'url(' + shareData.image + ')'
+        shareAlbum.style.backgroundImage = 'url(' + shareData.album + ')'
 
         setTimeout(function() {
             shareFrame.style.opacity = '100%'
         }, 10)
+    })
+
+    shareEdit.addEventListener('click', function () {
+        loggingStatus = 'sharing'
+        setLogs(shareData)
+        loggingFrame.style.display = 'flex'
+        setTimeout(function() {
+            loggingFrame.style.opacity = '100%'
+        }, 100)
     })
 
     shareFinish.addEventListener('click', function () {
@@ -782,7 +800,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let sharedURL = originURL + '?shared_id=' + sharedUID
         let copyTarget = document.createElement('textarea')
 
-        createSharedLog(sharedUID, playingData)
+        createSharedLog(sharedUID, shareData)
 
         copyTarget.value = sharedURL
         document.body.appendChild(copyTarget)
@@ -791,11 +809,6 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.removeChild(copyTarget)
 
         alert('Link has been copied!')
-
-        // navigator.share({
-        //     title: 'Muzed Log Share',
-        //     url: sharedURL
-        // })
     })
     
     shareExit.addEventListener('click', function () {
