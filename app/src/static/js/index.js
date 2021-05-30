@@ -397,6 +397,8 @@ document.addEventListener('DOMContentLoaded', function () {
         
         setTimeout(function () {
             previousLog.style.display = 'none'
+            taggingMood.style.display = 'none'
+            taggingPeople.style.display = 'none'
             searchResult.style.display = 'none'
             loggingSearch.style.display = 'none'
             loggingSearch.style.opacity = 0
@@ -444,7 +446,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     exitLog.addEventListener('click', function () {
-        loggingExitFrame.style.display = 'flex'
+        if (loggingStatus == 'logging') {
+            loggingExitFrame.style.display = 'flex'
+        } else {
+            searchPreview.pause()
+            clearLogFrames()
+        }
     })
 
     loggingExitReturn.addEventListener('click', function () {
