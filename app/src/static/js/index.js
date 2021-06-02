@@ -668,6 +668,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let memoriesSubframe = document.querySelector('#memories-subframe')
     let notesSubframeText = document.querySelector('#note-subframe-text')
     let moodMemoryImg = document.querySelector('#mood-memory-img')
+    let subtitleList = document.querySelectorAll('.playing-subtitle')
 
     let playingSubframeStatus = false
     let playingAudio = new Audio()
@@ -792,6 +793,16 @@ document.addEventListener('DOMContentLoaded', function () {
             playingSubframeStatus = false
             clearPlayingSubframes()
         }
+    })
+
+    // Selecting Subheader Option 
+    subtitleList.forEach(element => {
+        element.addEventListener('click', function() {
+            subtitleList.forEach(element => {
+                element.style.color = '#AAA'
+            })
+            element.style.color = 'white'
+        })
     })
 
     // Open Notes
