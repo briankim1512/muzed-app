@@ -119,16 +119,17 @@
                 </div>
             </div>
             <!-- People Tagging Frame -->
-            <div id="tagging-people" class="subframe flex-vertical flex-center flex-spaced">
+            <div id="tagging-people" class="subframe flex-vertical flex-center">
                 <h1 class="logging-title no-margin-bottom">Add People Tag</h1>
                 <input type="text" id="person-input" class="logging-textinput" placeholder="Add Person's Name">
-                <button id="person-input-button">Add Person</button>
+                <button id="person-input-button" class="tag-confirm">Add Person</button>
                 <div id="people-list">
                     <ul v-for="person in list">
                         <li>[[person]]</li>
                     </ul>
                 </div>
-                <textarea id="people-detail" class="logging-textarea logging-textinput bottom-buffer" placeholder="Give a brief descript about this person or people?"></textarea>
+                <textarea id="people-detail" class="logging-textarea logging-textinput" placeholder="Give a brief descript about this person or people?"></textarea>
+                <button id="people-confirm" class="tag-confirm">Confirm People Tag</button>
             </div>
             <!-- Mood Tagging Frame -->
             <div id="tagging-mood" class="subframe flex-vertical flex-center flex-start">
@@ -159,6 +160,7 @@
                         <p class="mood-text">EXCITED</p>
                     </div>
                 </div>
+                <button id="mood-confirm" class="tag-confirm">Confirm Mood Tag</button>
             </div>
         </div>
         <!-- Playing Frame -->

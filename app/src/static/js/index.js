@@ -343,7 +343,9 @@ document.addEventListener('DOMContentLoaded', function () {
     let personInput = document.querySelector('#person-input')
     let personInputButton = document.querySelector('#person-input-button')
     let peopleDetail = document.querySelector('#people-detail')
+    let peopleConfirm = document.querySelector('#people-confirm')
     let moodList = document.querySelectorAll('.mood-item')
+    let moodConfirm = document.querySelector('#mood-confirm')
     
     let finishLog = document.querySelector('#finish-log')
 
@@ -574,12 +576,33 @@ document.addEventListener('DOMContentLoaded', function () {
         peopleList.list.push(personInput.value)
     })
 
+    peopleConfirm.addEventListener('click', function() {
+        if (peopleList.list.length == 0) {
+            alert('Please add a person')
+        } else {
+            goBackFrame()
+        }
+    })
+
     // Mood Select
     moodList.forEach(element => {
         element.addEventListener('click', function() {
-            goBackFrame()
             moodLog = element.childNodes[3].innerHTML
+            moodList.forEach(element => {
+                element.style.borderColor = '#CCC3AB'
+                element.style.borderWidth = '1px'
+            })
+            element.style.borderColor = 'white'
+            element.style.borderWidth = '3px'
         })
+    })
+
+    moodConfirm.addEventListener('click', function () {
+        if (!moodLog) {
+            alert('Please choose a mood!')
+        } else {
+            goBackFrame()
+        }
     })
 
     // Add Image
